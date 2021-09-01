@@ -6,7 +6,7 @@ class ProductService {
     }
 
     get(id) {
-        return http.get(`?id=${id}`);
+        return http.get(`/product/${id}`);
     }
 
     find(query, by = "name", page = 0) {

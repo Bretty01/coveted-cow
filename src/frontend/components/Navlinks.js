@@ -6,7 +6,7 @@ function Navlinks(){
         <div className="nav_links">
             <div className="nav_links_outer">
                 <div className="nav_links_inner">
-                    <Link>Today's Deals</Link>
+                    <Link to="/catalog">Products</Link>
                     <Link>Customer Service</Link>
                     <Link>Gift Cards</Link>
                     <Link>Registry</Link>

@@ -1,3 +1,5 @@
+import mongodb from "mongodb"
+const ObjectId = mongodb.ObjectId
 let productInfo
 
 export default class ProductInfoDao {
@@ -27,7 +29,6 @@ export default class ProductInfoDao {
                 query = {"product_description.sku": parseInt(filters["sku"])}
             }
         }
-
         let cursor
 
         try {
@@ -47,6 +48,22 @@ export default class ProductInfoDao {
         } catch (err) {
             console.error(`Unable to convert cursor to array or problem counting documents, ${err}`)
             return { productList: [], totalNumProducts: 0 }
+        }
+    }
+
+    static async getProductByID(id) {
+        try {
+            const pipeline = [
+                {
+                    $match: { _id: new ObjectId(id), },
+                },
+                //TODO: When reviews are added to the database, add code to retrieve the reviews to the database
+            ]
+
+            return productInfo.aggregate(pipeline).next()
+        } catch(err) {
+            console.error(`Unable to retrieve product information: ${err}`)
+            throw err
         }
     }
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import {Carousel} from 'react-bootstrap'
 import '../css/Home.css'
-import Product from './Product.js'
+import Product from './ProductCard.js'
 import ProductService from "../utilities/product-service.js"
 
 function Home(){
