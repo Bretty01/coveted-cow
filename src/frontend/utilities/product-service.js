@@ -1,16 +1,21 @@
 import http from "../http-common.js";
 
 class ProductService {
-    getAll(page = 0) {
-        return http.get(`?page=${page}`);
+
+    getQuery(query = "") {
+        return http.get(query)
     }
 
-    get(id) {
-        return http.get(`/product/${id}`);
+    getById(id) {
+        return http.get(`/product/${id}`)
+    }
+
+    getBrandList() {
+        return http.get(`/brand`)
     }
 
     find(query, by = "name", page = 0) {
-        return http.get(`?${by}=${query}&page=${page}`);
+        return http.get(`?${by}=${query}&page=${page}`)
     }
 }
-export default new ProductService();
+export default new ProductService()

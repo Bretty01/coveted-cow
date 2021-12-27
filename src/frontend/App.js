@@ -11,9 +11,8 @@ import Catalog from './components/Catalog.js'
 import {auth} from './Firebase.js'
 import {useEffect} from 'react'
 import {useStateValue} from './StateProvider.js'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'popper.js'
-import 'bootstrap/dist/js/bootstrap.bundle.min'
+
+
 
 function App() {
   const [{loggedinuser}, dispatch] = useStateValue()

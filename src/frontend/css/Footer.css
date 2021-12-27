@@ -3,6 +3,7 @@
     width: 100%;
     min-height: 200px;
     color: white;
+    z-index: 2;
 }
 
 .footer_top{

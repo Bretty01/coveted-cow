@@ -5,6 +5,9 @@ import App from './frontend/App';
 import reportWebVitals from './frontend/reportWebVitals';
 import { StateProvider } from './frontend/StateProvider.js'
 import reducer, { initialState } from './frontend/reducer.js'
+import 'jquery'
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 ReactDOM.render(
   <React.StrictMode>

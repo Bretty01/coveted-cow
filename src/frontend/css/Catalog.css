@@ -1,0 +1,15 @@
+.sidebar {
+    height: 100%;
+    width: 240px;
+    position: fixed;
+    z-index: 0;
+    top: 71px;
+    left: 0;
+    bottom: 200px;
+    background-color: sandybrown;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+.catalog-content {
+    margin-left: 250px;
+}

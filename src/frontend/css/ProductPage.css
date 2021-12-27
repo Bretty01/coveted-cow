@@ -1,0 +1,12 @@
+.product-image{
+    max-width:500px;
+}
+
+.product-page-upper{
+    display: flex;
+    justify-content: space-around;
+}
+
+h2{
+    text-align: center
+}

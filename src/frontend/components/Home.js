@@ -1,5 +1,5 @@
 import React from 'react'
-import {Carousel} from 'react-bootstrap'
+import Carousel from 'react-bootstrap/Carousel'
 import '../css/Home.css'
 import Product from './ProductCard.js'
 import ProductService from "../utilities/product-service.js"
@@ -8,7 +8,7 @@ function Home(){
     return(
 
         <div className="home">
-            <Carousel fade controls={false} id="home-carousel" className="d-block">
+            <Carousel fade controls={true} id="home-carousel" className="d-block">
                 <Carousel.Item>
                     <img
                         className="rounded d-block w-100"

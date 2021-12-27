@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import ProductService from  "../utilities/product-service"
+import "../css/ProductPage.css"
 
 const ProductPage = props => {
     const initialState = {
@@ -14,7 +15,7 @@ const ProductPage = props => {
     
     const getProduct = (id) => {
         console.log(product)
-        ProductService.get(id)
+        ProductService.getById(id)
             .then(res => {
                 setProduct(res.data)
                 setRenderState(true)
@@ -34,10 +35,17 @@ const ProductPage = props => {
             { isRendered ? (
                 <div>
                     <h2>{product.name}</h2>
-                    <img src={product.image || "https://c.tenor.com/I6kN-6X7nhAAAAAi/loading-buffering.gif"} />
-                    <p><strong>Price: </strong>{product.price}</p>
-                    <div class="container">{product.product_description.details}</div>
-                    <div class="container">
+                    <div className="product-page-upper">
+                        <img className="product-image" src={product.image || "https://c.tenor.com/I6kN-6X7nhAAAAAi/loading-buffering.gif"} />
+                        <div className="product-page-sales">
+                            <p><strong>Price: </strong>{product.price}</p>
+                            <div>Checkout</div>
+                        </div>
+                    </div>
+                    <div className="container">{product.product_description.details}</div>
+
+                    <h2>Details</h2>
+                    <div className="container">
                         <div className="row">
                             <div className="col-4">SKU</div>
                             <div className="col-8">{product.product_description.sku}</div>

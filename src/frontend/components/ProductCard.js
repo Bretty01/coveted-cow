@@ -8,7 +8,7 @@ function ProductCard(props){
     //const[{basket}, dispatch] = useStateValue()
     const[products, setProducts] = useState([])
     useEffect(() => {
-        retrieveProducts();
+        retrieveProducts()
     }, [])
 
     //console.log('basket content', basket)
