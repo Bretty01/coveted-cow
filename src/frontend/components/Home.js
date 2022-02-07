@@ -7,11 +7,11 @@ import ProductService from "../utilities/product-service.js"
 function Home(){
     return(
 
-        <div className="home">
-            <Carousel fade controls={true} id="home-carousel" className="d-block">
+        <div id="top" className="home">
+            <Carousel fade controls={false} id="home-carousel" className="d-block m-3">
                 <Carousel.Item>
                     <img
-                        className="rounded d-block w-100"
+                        className="rounded d-block"
                         src="https://m.media-amazon.com/images/I/81us3MK2yfL._AC_SL1500_.jpg"
                         alt="Carousel 1"
                     />
@@ -20,6 +20,7 @@ function Home(){
                         <p>That is quite the floof!</p>
                     </Carousel.Caption>
                 </Carousel.Item>
+
                 <Carousel.Item>
                     <img
                         className="rounded d-block"
@@ -42,6 +43,7 @@ function Home(){
                         <p>FLOOF OVERLOAD!</p>
                     </Carousel.Caption>
                 </Carousel.Item>
+
             </Carousel>
             <div>
                 <h1>Today's deals</h1>

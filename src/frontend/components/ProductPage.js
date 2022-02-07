@@ -31,15 +31,15 @@ const ProductPage = props => {
 
 
     return(
-        <div>
+        <div id="top">
             { isRendered ? (
                 <div>
                     <h2>{product.name}</h2>
                     <div className="product-page-upper">
                         <img className="product-image" src={product.image || "https://c.tenor.com/I6kN-6X7nhAAAAAi/loading-buffering.gif"} />
                         <div className="product-page-sales">
-                            <p><strong>Price: </strong>{product.price}</p>
-                            <div>Checkout</div>
+                            <h3><strong>$</strong>{product.price}</h3>
+                            <div className="product-page-checkout">Checkout</div>
                         </div>
                     </div>
                     <div className="container">{product.product_description.details}</div>

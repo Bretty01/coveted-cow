@@ -133,7 +133,7 @@ function Catalog() {
     }
 
     return (
-        <div>
+        <div id="top">
             <div class="sidebar">
                 <Dropdown>
                     <Dropdown.Toggle id="sortMenu" >
@@ -165,6 +165,18 @@ function Catalog() {
                     })}
                 </Form>
             </div>
+            <div className="mobile-sortFilter">
+                <button type="button" className="button-generic">Filter</button>
+                <button aria-haspopup="true" aria-expanded="false" id="sortMenu" type="button"
+                        className="button-generic dropdown-toggle">Sort By...
+                </button>
+                <Dropdown.Menu>
+                    <Dropdown.Item onClick={() => applySort("name", 1)}>A-Z</Dropdown.Item>
+                    <Dropdown.Item onClick={() => applySort("name", -1)}>Z-A</Dropdown.Item>
+                    <Dropdown.Item onClick={() => applySort("price", 1)}>Price: Low to High</Dropdown.Item>
+                    <Dropdown.Item onClick={() => applySort("price", -1)}>Price: High to Low</Dropdown.Item>
+                </Dropdown.Menu>
+            </div>
 
             <div className="catalog-content">
                 <div class="row">
@@ -176,13 +188,19 @@ function Catalog() {
                         )
                     })}
                 </div>
-                <div>
-                    <button type="button" id="prevButton" className="btn btn-primary"
-                        onClick={() => {setCurrentPage(page => page - 1)}}>Previous</button>
-                    <p>Page {data.page + 1} of {lastPage}</p>
-                    <button type="button" id="nextButton" className="btn btn-primary"
-                        onClick={() => {setCurrentPage(page => page + 1)}}>Next</button>
-                </div>
+            </div>
+            <div className="page-buttons">
+                <button type="button" id="prevButton" className="button-generic"
+                        onClick={() => {
+                            setCurrentPage(page => page - 1)
+                        }}>Previous
+                </button>
+                <p>Page {data.page + 1} of {lastPage}</p>
+                <button type="button" id="nextButton" className="button-generic"
+                        onClick={() => {
+                            setCurrentPage(page => page + 1)
+                        }}>Next
+                </button>
             </div>
         </div>
     )

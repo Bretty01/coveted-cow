@@ -1,4 +1,4 @@
-
+/** Large screen CSS */
 @media (min-width: 768px){
     .header-desktop{
         background-color: #883C00;
@@ -67,8 +67,13 @@
         margin-left: 10px;
         margin-right: 10px;
     }
+
+    #mobile-menu{
+        display: none;
+    }
 }
 
+/** Small screen CSS */
 
 @media (max-width: 767.98px)
 {
@@ -77,8 +82,10 @@
         position:relative;
     }
     .header-mobile{
-        height: 70px;
+        width: 100vw !important;
+        height: var(--header-height);
         position:fixed;
+        top: 0;
         z-index: 100;
         background-color: #883C00;
         display: flex;
@@ -88,8 +95,8 @@
     .header-desktop, .nav_links{
         display:none;
     }
-    .header_logo{
-        left:0;
+    .header-home{
+        left:25px;
     }
     .header-end{
         display: flex;
@@ -98,7 +105,75 @@
     .header-end *{
         margin: 10px;
     }
-    .header-searchIcon{
 
+    #mobile-menu{
+        display:block;
+        position:fixed;
+        height: 100%;
+        width: 70%;
+        top: 70px;
+        transform: translateX(-100%);
+        z-index:1000;
+        background-color: sandybrown;
+        opacity: 0.9;
     }
+
+    #mobile-menu h1{
+        text-align: left;
+        padding: 10px;
+    }
+
+    #header-menu{
+        display:none;
+    }
+
+    .disable-menu{
+        animation-name: rotate-cw;
+        animation-duration: 2s;
+        animation-direction: reverse;
+        animation-fill-mode: both;
+    }
+
+    .enable-menu{
+        animation-name: rotate-cw;
+        animation-duration: 1s;
+        animation-fill-mode: both;
+    }
+
+    @keyframes rotate-cw {
+        0% {
+            transform: rotate(0);
+        }
+        100%{
+            transform: rotate(90deg);
+        }
+    }
+
+    @keyframes rotate-ccw {
+        0% {
+            transform: rotate(90deg);
+        }
+        100%{
+            transform: rotate(0);
+        }
+    }
+
+    @keyframes slide-menu-on {
+        0%{
+            transform: translateX(-100%);
+        }
+        100% {
+            transform: translateX(0%);
+        }
+    }
+    @keyframes slide-menu-off {
+        0% {
+            transform: translateX(0%);
+        }
+        100% {
+            transform: translateX(-100%);
+        }
+    }
+
+
 }

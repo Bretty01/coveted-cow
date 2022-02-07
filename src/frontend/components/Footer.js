@@ -3,9 +3,9 @@ import '../css/Footer.css'
 function Footer(){
     return(
         <div className="footerArea">
-            <div className="footer_top" onClick={window.scrollTo(0,0)}>
-                <p>Back To Top</p>
-            </div>
+            <a href="#top">
+                Back To Top
+            </a>
             <div className="footer_links">
                 <div className="footer_linkarea">
                     <span>test</span>

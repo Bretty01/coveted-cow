@@ -1,15 +1,62 @@
+.button-generic {
+    width: 35%;
+    height: 3em;
+    background-color: var(--alt-background);
+    border-radius: 0.3em;
+    border-color: #883C00;
+}
+
 .sidebar {
     height: 100%;
     width: 240px;
     position: fixed;
     z-index: 0;
-    top: 71px;
+    top: var(--header-height);
     left: 0;
     bottom: 200px;
     background-color: sandybrown;
     overflow-x: hidden;
     padding-top: 20px;
 }
-.catalog-content {
-    margin-left: 250px;
+
+.mobile-sortFilter {
+    display: none;
+}
+
+.page-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: baseline;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .catalog-content {
+        margin-left: 250px;
+    }
+
+}
+
+@media only screen and (max-width:767.98px) {
+    .sidebar {
+        display: none;
+    }
+
+    .catalog-content {
+        display:block;
+        height: 100%;
+    }
+
+    .catalog-content > .row {
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    .mobile-sortFilter {
+        background-color: sandybrown;
+        margin-top: var(--header-height);
+        display: flex;
+        justify-content: space-evenly;
+        padding: 20px;
+    }
 }
