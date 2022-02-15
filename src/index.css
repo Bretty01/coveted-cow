@@ -20,3 +20,9 @@ code {
   --main-background: #ffffff;
   --alt-background: #f2f2f2
 }
+
+.button-generic {
+  background-color: var(--alt-background);
+  border-radius: 0.3em;
+  border-color: #883C00;
+}

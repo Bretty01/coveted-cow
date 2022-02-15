@@ -52,9 +52,8 @@ function ProductCard(props){
                  alt="Product Image" />
             <div className="product_info">
                 <p>{products[0]?.name || ""}</p>
-                <p className="product_price">
-                    <small>$</small>
-                    <strong>{products[0]?.price || "0"}</strong>
+                <p className="product-price">
+                    <strong>${products[0]?.price || "0"}</strong>
                 </p>
             </div>
             { /*

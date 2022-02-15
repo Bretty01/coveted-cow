@@ -1,15 +1,44 @@
 
-.product-image{
-    max-width:500px;
-}
-
 .product-page-upper{
     display: flex;
     justify-content: space-around;
 }
-
 h2{
-    text-align: center
+    text-align: center;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+strong{
+    font-size: 2rem;
+    color: sandybrown;
+}
+
+.product-page-checkout > button {
+    background-color: #883C00;
+    color: white;
+}
+
+.tab button.active {
+    background-color: #ccc;
+}
+
+#specs > .container {
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+/* Used to disable the increment/decrement buttons in the input field for quantity.
+   Disabled for the replacement increment/decrement buttons
+ */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type=number] {
+    -moz-appearance: textfield;
 }
 
 @media only screen and (max-width: 767.98px) {
@@ -17,16 +46,64 @@ h2{
         margin-top: var(--header-height);
     }
 
+    #main-content > div {
+        margin: 0 5%;
+    }
+
     .product-page-upper{
         flex-direction: column;
     }
 
-    .product-page-upper>div{
-        width: 90%;
-        margin: 5%;
+    .product-page-upper > div, img{
+        width: 100%;
     }
 
     .product-page-checkout{
-        height: 300px;
+        height: 5rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
     }
+
+    .product-page-checkout > input {
+        width: 3em;
+    }
+
+    .product-page-checkout > button {
+        width: 80%;
+    }
+
+     .product-page-checkout *{
+         height: 3em;
+     }
+
+
+     .tablinks{
+         width: 40%;
+         max-width: 150px;
+         height: 3rem;
+         border-bottom: none;
+         background-color: white;
+     }
+
+     #details > .container{
+         border: 2px solid black;
+     }
+
+    #main-content > .product-page-description{
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+     #main-content > #details {
+         margin-bottom: 5%;
+     }
+
+     #details .row{
+         padding-top: 0.2rem;
+         padding-bottom: 0.2rem;
+     }
+
+
 }

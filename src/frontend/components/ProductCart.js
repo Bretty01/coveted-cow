@@ -14,20 +14,14 @@ function ProductCart({id, title, image, price, rating}){
 
     return(
         <div className="productCart">
-            <img className="productCart_image" src={image} alt="" />
-            <div className="productCart_info">
-                <p className="productCart_title">{title}</p>
-                <p className="productCart_price">${price}</p>
+            <img className="productCart-image" src={image} alt="" />
+            <div className="productCart-info">
+                <p className="productCart-title">{title}</p>
+                <p className="productCart-price">${price}</p>
 
-                <div className="productCart_rating">
-                    {
-                        Array(rating)
-                            .fill()
-                            .map((_) => (
-                            <span>*</span>
-                        ))
-                    }
-                </div>
+                {
+                    //TODO: Add rating system.
+                }
                 <button onClick={removeItem}>Remove from the cart</button>
             </div>
         </div>

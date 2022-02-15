@@ -1,11 +1,3 @@
-.button-generic {
-    width: 35%;
-    height: 3em;
-    background-color: var(--alt-background);
-    border-radius: 0.3em;
-    border-color: #883C00;
-}
-
 .sidebar {
     height: 100%;
     width: 240px;
@@ -42,6 +34,11 @@
         display: none;
     }
 
+    #filter-block{
+        display: none;
+        padding-top: 40px;
+    }
+
     .catalog-content {
         display:block;
         height: 100%;
@@ -56,7 +53,51 @@
         background-color: sandybrown;
         margin-top: var(--header-height);
         display: flex;
-        justify-content: space-evenly;
+        flex-direction: column;
         padding: 20px;
+    }
+
+    #sortFilter-buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    .mobile-sortFilter button {
+        width: 35vw;
+        padding: 0.5rem;
+        background-color: #883C00;
+        border-width: 1px;
+        border-color: black;
+        color: black;
+    }
+
+    .mobile-sortFilter button:hover {
+        background-color: #883C00;
+        color: white;
+    }
+
+    .mobile-sortFilter button:focus {
+        box-shadow: 0 0 0 0.25rem black !important;
+        background-color: #883C00 !important;
+        color: white !important;
+    }
+
+    .expand {
+        display: flex !important;
+        flex-direction: row;
+        justify-content: space-around;
+        animation-name: vertical-expand;
+        animation-duration: 1s;
+        animation-fill-mode: both;
+    }
+}
+
+@keyframes vertical-expand {
+    0%{
+        height: 0;
+    }
+    100%{
+        height: 400px;
     }
 }

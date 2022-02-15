@@ -15,7 +15,7 @@ function Catalog() {
     const[brandFilters, setBrandFilters] = useState([])
     const[sort, setSort] = useState()
     const[filters, setFilters] = useState({"price" : [], "brand" : []})
-
+    const[isExpanded, setExpand] = useState(false);
     useEffect(() => {
         //retrieveProducts()
         getBrandList()
@@ -132,11 +132,23 @@ function Catalog() {
         createQuery()
     }
 
+    const mobileFilterExpand = () => {
+        var filter = document.getElementById("filter-block")
+        if(isExpanded) {
+            filter.className = "";
+            setExpand(false);
+        }
+        else {
+            filter.className = "expand"
+            setExpand(true);
+        }
+    }
+
     return (
         <div id="top">
             <div class="sidebar">
                 <Dropdown>
-                    <Dropdown.Toggle id="sortMenu" >
+                    <Dropdown.Toggle id="sortMenu">
                         Sort By...
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
@@ -166,16 +178,40 @@ function Catalog() {
                 </Form>
             </div>
             <div className="mobile-sortFilter">
-                <button type="button" className="button-generic">Filter</button>
-                <button aria-haspopup="true" aria-expanded="false" id="sortMenu" type="button"
-                        className="button-generic dropdown-toggle">Sort By...
-                </button>
-                <Dropdown.Menu>
-                    <Dropdown.Item onClick={() => applySort("name", 1)}>A-Z</Dropdown.Item>
-                    <Dropdown.Item onClick={() => applySort("name", -1)}>Z-A</Dropdown.Item>
-                    <Dropdown.Item onClick={() => applySort("price", 1)}>Price: Low to High</Dropdown.Item>
-                    <Dropdown.Item onClick={() => applySort("price", -1)}>Price: High to Low</Dropdown.Item>
-                </Dropdown.Menu>
+                <div id="sortFilter-buttons">
+                    <button type="button" className="button-generic" id="button-filter"
+                        onClick={() => mobileFilterExpand()}>Filter</button>
+                    <Dropdown>
+                        <Dropdown.Toggle id="sortMenu" className="button-generic">Sort By...
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                            <Dropdown.Item onClick={() => applySort("name", 1)}>A-Z</Dropdown.Item>
+                            <Dropdown.Item onClick={() => applySort("name", -1)}>Z-A</Dropdown.Item>
+                            <Dropdown.Item onClick={() => applySort("price", 1)}>Price: Low to High</Dropdown.Item>
+                            <Dropdown.Item onClick={() => applySort("price", -1)}>Price: High to Low</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </div>
+                <div id="filter-block">
+                    <Form>
+                        <h4>Price</h4>
+                        <Form.Check type="checkbox" label="0-19.99" onClick={(e) => setPriceFilter(0, 19.99, e)}/>
+                        <Form.Check type="checkbox" label="20-29.99" onClick={(e) => setPriceFilter(20, 29.99, e)}/>
+                        <Form.Check type="checkbox" label="30-49.99" onClick={(e) => setPriceFilter(30, 49.99, e)}/>
+                        <Form.Check type="checkbox" label="50-99.99" onClick={(e) => setPriceFilter(50, 99.99, e)}/>
+                        <Form.Check type="checkbox" label="100-199.99" onClick={(e) => setPriceFilter(100, 199.99, e)}/>
+                        <Form.Check type="checkbox" label="200-299.99" onClick={(e) => setPriceFilter(200, 299.99, e)}/>
+                    </Form>
+                    <Form id="brandFilter">
+                        <h4>Brand</h4>
+                        {brandFilters.map(brand => {
+                            return(
+                                <Form.Check type="checkbox" label={brand}
+                                            onClick={(e) => setBrandFilter(brand, e)}/>
+                            )
+                        })}
+                    </Form>
+                </div>
             </div>
 
             <div className="catalog-content">

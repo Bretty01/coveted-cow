@@ -25,6 +25,7 @@ export default class ProductInfoDao {
         let sortOrder
         let sortType
 
+
         if(filters || search) {
             query = {"$and": []}
             if(search) {
@@ -32,7 +33,7 @@ export default class ProductInfoDao {
                 query.$and.push(textSearch)
             }
             if(filters) {
-                if(!"sku" in filters) {
+                if(!filters.hasOwnProperty("sku")) {
                     if (filters["brand"].length > 0) {
                         let or = {"$or": []}
                         for (const i in filters["brand"]) {
@@ -64,8 +65,6 @@ export default class ProductInfoDao {
 
             console.log(JSON.stringify(query))
         }
-
-
 
         if(sort) {
             sortOrder = parseInt(sort.order)
