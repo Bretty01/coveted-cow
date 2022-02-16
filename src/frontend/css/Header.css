@@ -99,8 +99,7 @@
         left:25px;
     }
     .header-end{
-        display: flex;
-        justify-content: flex-end;
+        display: block;
     }
     .header-end *{
         margin: 10px;

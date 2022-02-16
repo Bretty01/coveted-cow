@@ -5,6 +5,7 @@ import { useStateValue } from '../StateProvider.js'
 import '../css/Header.css';
 import {auth} from '../Firebase.js'
 import {Container} from 'react-bootstrap'
+import Alert from './Alert.js'
 function Header() {
     const [inputText, setInputText] = useState("")
     const [menuSwitch, setMenuSwitch] = useState(-1)
@@ -39,7 +40,6 @@ function Header() {
             menuBox.style.animation = "slide-menu-off 500ms ease-out forwards"
         }
 
-        console.log(menuBox.getAnimations())
     }
 
     return(
@@ -58,7 +58,9 @@ function Header() {
                     </Link>
                     <div className="header-end">
                         <Search className="header-searchIcon"/>
-                        <ShoppingBasket/>
+                        <Link to="/checkout" className="header-checkout">
+                            <ShoppingBasket/>
+                        </Link>
                     </div>
 
                 </Container>
@@ -98,7 +100,18 @@ function Header() {
                 <Link to="/catalog">
                     <h1 onClick={() => changeMenuState()}>Products</h1>
                 </Link>
+                <Link to="/checkout">
+                    <h1 onClick={() => changeMenuState()}>Checkout</h1>
+                </Link>
+
+                <Link to={!loggedinuser && "/login"} className="header_link">
+                    <div onClick={logoutUser} className="header_option">
+                        <span className="header_optionOne">Hello, {loggedinuser?.email}</span>
+                        <span className="header_optionTwo">{loggedinuser ? 'Sign Out' : 'Sign In'}</span>
+                    </div>
+                </Link>
             </div>
+            <Alert/>
         </div>
     )
 }

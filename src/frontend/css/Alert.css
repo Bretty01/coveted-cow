@@ -1,0 +1,39 @@
+#alert-box{
+    position: fixed;
+    bottom: -500px;
+    z-index: 999;
+    text-align: center;
+    width: 100vw;
+    font-weight: bold;
+    border: 2px solid black;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom: none;
+}
+
+.enable{
+    animation-name: slide-up;
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+}
+
+.error{
+    background-color: lightcoral;
+}
+
+.success{
+    background-color: lightgreen;
+}
+
+.error img{
+    content: url()
+}
+
+@keyframes slide-up {
+    0%{
+        bottom: -500px;
+    }
+    100%{
+        bottom: 0;
+    }
+}

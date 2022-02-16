@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react"
 import ProductService from  "../utilities/product-service"
 import "../css/ProductPage.css"
-
+import { useStateValue } from '../StateProvider.js'
+import Alert, {setAlert} from "./Alert.js"
 const ProductPage = props => {
     const initialState = {
         id: null,
@@ -12,6 +13,7 @@ const ProductPage = props => {
     }
     const [product, setProduct] = useState(initialState)
     const [isRendered, setRenderState] = useState(false)
+    const[{basket}, dispatch] = useStateValue()
 
     useEffect(() => {
         getProduct(props.match.params.id)
@@ -36,6 +38,33 @@ const ProductPage = props => {
             })
     }
 
+    const addToBasket = () => {
+        console.log(basket)
+        const quantity = parseInt(document.getElementById("input-quantity").value)
+        if(quantity === "" || quantity === 0 || !quantity) {
+            setAlert("error", "Please enter a valid quantity.")
+            return
+        }
+        for(var item in basket) {
+            if(basket[item].id === product._id) {
+                console.log("I am here.")
+                setAlert("error", "You may not have more than one of the same item in your shopping cart.")
+                return
+            }
+        }
+        dispatch({
+            type: 'ADD_TO_BASKET',
+            item: {
+                id: product._id,
+                name: product.name,
+                image: product.image,
+                price: product.price,
+                quantity: quantity,
+                total: product.price * quantity
+            }
+        })
+        setAlert("success", "Successfully added " + quantity + " " + product.name + " to your shopping cart.")
+    }
 
     const swapTabs = (e, tab) => {
 
@@ -60,12 +89,14 @@ const ProductPage = props => {
                 <div id="main-content">
                     <h2>{product.name}</h2>
                     <div className="product-page-upper">
-                        <img className="product-image" src={product.image || "https://c.tenor.com/I6kN-6X7nhAAAAAi/loading-buffering.gif"} />
+                        <img className="product-image" src={product.image ||
+                        "https://c.tenor.com/I6kN-6X7nhAAAAAi/loading-buffering.gif"} />
                         <div className="product-page-sales">
                             <p><strong>${product.price}</strong></p>
                             <div className="product-page-checkout">
-                                <input type="number" className="input-quantity button-generic" min="0" max="50"/>
-                                <button className="button-generic">Add to Checkout</button>
+                                <input type="number" id="input-quantity" className="button-generic"
+                                       min="0" max="50"/>
+                                <button className="button-generic" onClick={addToBasket}>Add to Checkout</button>
                             </div>
                         </div>
                     </div>

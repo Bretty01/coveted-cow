@@ -10,11 +10,11 @@ function Checkout(){
 
     return(
         <div className="checkout">
-            <div className="checkout_left">
+            <div className="checkout-content">
                 {
                     basket.length === 0 ? (
                         <div>
-                            <h2 className="checkout_title">Your shopping basket is empty.</h2>
+                            <h2 className="checkout-title">Your shopping basket is empty.</h2>
                             <p>Any items you wish to purchase will display here.</p>
                         </div>
                     ) : (
@@ -24,22 +24,21 @@ function Checkout(){
                                 basket.map(item => (
                                     <ProductCart
                                         id={item.id}
-                                        title={item.title}
+                                        name={item.name}
                                         image={item.image}
                                         price={item.price}
-                                        rating={item.rating}
+                                        quantity={item.quantity}
+                                        total={item.total}
                                     />
                                 ))
                             }
                         </div>
                     )
-
                 }
-
             </div>
             {
                 basket.length > 0 && (
-                    <div className="checkout_right">
+                    <div className="checkout-subtotal">
                         <Subtotal/>
                     </div>
                 )

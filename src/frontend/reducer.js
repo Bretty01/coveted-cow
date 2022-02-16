@@ -18,6 +18,7 @@ const reducer = (state, action) => {
             }
         case 'REMOVE_FROM_CART':
             let newCart = [...state.basket]
+            console.log(state.basket)
             const index = state.basket.findIndex((basketItem) => basketItem.id === action.id)
             if(index >= 0){
                 newCart.splice(index, 1)

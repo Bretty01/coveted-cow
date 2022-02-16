@@ -5,26 +5,12 @@ import ProductService from '../utilities/product-service.js'
 import { Link } from 'react-router-dom'
 
 function ProductCard(props){
-    //const[{basket}, dispatch] = useStateValue()
     const[products, setProducts] = useState([])
     useEffect(() => {
         retrieveProducts()
     }, [])
 
-    //console.log('basket content', basket)
-    /*
-    const addToBasket = () => {
-        dispatch({
-            type: 'ADD_TO_BASKET',
-            item: {
-                id: id,
-                title: title,
-                image: image,
-                price: price,
-                rating: rating
-            }
-        })
-    }*/
+
 
     const retrieveProducts = () => {
         if(props.sku !== undefined) {

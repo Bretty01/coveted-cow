@@ -5,8 +5,13 @@ import '../css/Subtotal.css'
 
 function Subtotal(){
 
-    const getCartTotal = (basket) =>
-        basket?.reduce((amount,item) => item.price = amount, 0);
+    const getCartTotal = (basket) => {
+        //Needed to grab just the cost, but the whole object was being added to the basket.
+        //  The check is to make sure the price number is grabbed.
+        var total = basket?.reduce((amount, item) => (amount.total || amount) + item.total)
+        return total.price || total
+    }
+    /** This be resetting all item's price to 0.*/
     const [{basket}, dispatch] = useStateValue();
 
     return(

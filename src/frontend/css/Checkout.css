@@ -5,12 +5,16 @@
     height: max-content;
 }
 
-.checkout_title{
+.checkout-title{
     margin-right: 10px;
     padding: 10px;
     border-bottom: 1px solid lightgray;
 }
-.checkout_ad{
-    width: 100%;
-    margin-bottom: 10px;
+
+@media (max-width: 767.98px) {
+    .checkout{
+        margin-top: var(--header-height);
+        display: flex;
+        flex-direction: column;
+    }
 }
