@@ -16,6 +16,10 @@ const reducer = (state, action) => {
                 ...state,
                 loggedinuser: action.user
             }
+
+        case 'REMOVE_ALL':
+            return{...state, basket: []}
+
         case 'REMOVE_FROM_CART':
             let newCart = [...state.basket]
             console.log(state.basket)

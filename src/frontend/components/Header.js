@@ -34,6 +34,7 @@ function Header() {
         if (menuSwitch === 0) {
             menuIcon.style.animation = 'rotate-cw 500ms ease-out forwards'
             menuBox.style.animation = "slide-menu-on 500ms ease-out forwards"
+            menuBox.focus()
         }
         else if (menuSwitch === 1) {
             menuIcon.style.animation = 'rotate-ccw 500ms ease-out forwards'
@@ -54,19 +55,20 @@ function Header() {
                         </svg>
                     </label>
                     <Link to="/" className="header-home">
-                        <img className="header_logo" src="https://image.flaticon.com/icons/png/512/2636/2636252.png" alt="logo"/>
+                        <img className="header_logo" src="https://www.svgrepo.com/show/191135/cow.svg" alt="logo"/>
                     </Link>
                     <div className="header-end">
                         <Search className="header-searchIcon"/>
                         <Link to="/checkout" className="header-checkout">
                             <ShoppingBasket/>
                         </Link>
+                        <span className="header-productCount">{basket?.length}</span>
                     </div>
 
                 </Container>
                 <Container fluid className="header-desktop">
                     <Link to="/">
-                        <img className="header_logo" src="https://image.flaticon.com/icons/png/512/2636/2636252.png" alt="logo"/>
+                        <img className="header_logo" src="https://www.svgrepo.com/show/191135/cow.svg" alt="logo"/>
                     </Link>
                         <div className="header-searchIcon">
                             <input type="text" className="header_searchInput" onChange={handleInput}/>
@@ -80,20 +82,20 @@ function Header() {
                         <div className="header_nav">
                             <Link to={!loggedinuser && "/login"} className="header_link">
                                 <div onClick={logoutUser} className="header_option">
-                                    <span className="header_optionOne">Hello, {loggedinuser?.email}</span>
-                                    <span className="header_optionTwo">{loggedinuser ? 'Sign Out' : 'Sign In'}</span>
+                                    <span className="header-optionOne">Hello, {loggedinuser?.email}</span>
+                                    <span className="header-optionTwo">{loggedinuser ? 'Sign Out' : 'Sign In'}</span>
                                 </div>
                             </Link>
                         </div>
                         <Link to="/checkout" className="header_link">
                             <div className="header_optionBasket">
                                 <ShoppingBasket/>
-                                <span className="header_optionTwo header_productCount">{basket?.length}</span>
+                                <span className="header-optionTwo header-productCount">{basket?.length}</span>
                             </div>
                         </Link>
                 </Container>
             </div>
-            <div id="mobile-menu">
+            <div id="mobile-menu" onfocusout={changeMenuState}>
                 <Link to="/">
                     <h1 onClick={() => changeMenuState()}>Home</h1>
                 </Link>

@@ -1,6 +1,7 @@
 import React from 'react'
 import CurrencyFormat from 'react-currency-format'
 import {useStateValue} from '../StateProvider.js'
+import {setAlert} from './Alert.js'
 import '../css/Subtotal.css'
 
 function Subtotal(){
@@ -11,15 +12,20 @@ function Subtotal(){
         var total = basket?.reduce((amount, item) => (amount.total || amount) + item.total)
         return total.price || total
     }
-    /** This be resetting all item's price to 0.*/
     const [{basket}, dispatch] = useStateValue();
+
+    const processTransaction = () => {
+        dispatch({
+            type: 'REMOVE_ALL'
+        })
+    }
 
     return(
         <div className="subtotal">
             <CurrencyFormat
                 renderText={(value) => (
                     <p>
-                        (Subtotal({basket.length} items) : <strong>{`${value}`}</strong>
+                        Subtotal({basket.length} items) : <b>{`${value}`}</b>
                     </p>
                 )}
                 decimalScale={2}
@@ -28,7 +34,7 @@ function Subtotal(){
                 thousandSeperator={true}
                 prefix={"$"}
             />
-            <button className="checkout_button">Proceed to Checkout</button>
+            <button onClick={processTransaction} className="checkout_button">Checkout</button>
         </div>
     )
 }

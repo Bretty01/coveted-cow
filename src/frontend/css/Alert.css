@@ -11,6 +11,12 @@
     border-bottom: none;
 }
 
+#alert-box > img {
+    height: 50px;
+    width: 50px;
+    float: left;
+}
+
 .enable{
     animation-name: slide-up;
     animation-duration: 0.5s;
@@ -21,8 +27,24 @@
     background-color: lightcoral;
 }
 
+.error > #alert-icon{
+    content: url(https://www.svgrepo.com/show/379869/close-circle.svg);
+}
+
 .success{
     background-color: lightgreen;
+}
+
+.success > #alert-icon{
+    content: url(https://www.svgrepo.com/show/379856/checkmark-circle.svg);
+}
+
+.notice{
+    background-color: darkorange;
+}
+
+.notice > #alert-icon{
+    content: url(https://www.svgrepo.com/show/379754/exclamation-mark.svg)
 }
 
 .error img{

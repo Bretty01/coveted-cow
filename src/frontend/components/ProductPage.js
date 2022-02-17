@@ -48,7 +48,7 @@ const ProductPage = props => {
         for(var item in basket) {
             if(basket[item].id === product._id) {
                 console.log("I am here.")
-                setAlert("error", "You may not have more than one of the same item in your shopping cart.")
+                setAlert("notice", "You may not have more than one of the same item in your shopping cart.")
                 return
             }
         }
