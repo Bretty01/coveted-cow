@@ -46,8 +46,8 @@ function Header() {
 
     return(
         <div>
-            <div className="header">
-                <Container fluid className="header-mobile">
+            <div>
+                <div className="header header-mobile">
                     <div id="header-left">
                         <input type="checkbox" id="header-menu" onClick={() => changeMenuState()}/>
                         <label className="btn" htmlFor="header-menu">
@@ -66,39 +66,38 @@ function Header() {
                         <Search className="header-searchIcon"/>
                         <Link to="/checkout" className="header-checkout">
                             <ShoppingBasket/>
+                            <span className="header-productCount">{basket?.length}</span>
                         </Link>
-                        <span className="header-productCount">{basket?.length}</span>
                     </div>
 
-                </Container>
-                <Container fluid className="header-desktop">
-                    <Link to="/">
-                        <img className="header_logo" src="https://www.svgrepo.com/show/191135/cow.svg" alt="logo"/>
+                </div>
+                <div className="header header-desktop">
+                    <Link to="/" id="header-left" >
+                        <Logo />
+                        <img src="https://fontmeme.com/permalink/220219/4690785ad27bbbaacf4dcf2e65c29223.png" />
                     </Link>
-                        <div className="header-searchIcon">
-                            <input type="text" className="header_searchInput" onChange={handleInput}/>
-                            <Link to={{
-                                pathname: "/catalog",
-                                state:{search: inputText}
-                            }}>
-                                <Search className="header-searchIcon"/>
-                            </Link>
-                        </div>
-                        <div className="header_nav">
-                            <Link to={!loggedinuser && "/login"} className="header_link">
-                                <div onClick={logoutUser} className="header_option">
-                                    <span className="header-optionOne">Hello, {loggedinuser?.email}</span>
-                                    <span className="header-optionTwo">{loggedinuser ? 'Sign Out' : 'Sign In'}</span>
-                                </div>
-                            </Link>
-                        </div>
-                        <Link to="/checkout" className="header_link">
-                            <div className="header_optionBasket">
-                                <ShoppingBasket/>
-                                <span className="header-optionTwo header-productCount">{basket?.length}</span>
+                    <div id="header-middle">
+                        <input type="text" className="header_searchInput" onChange={handleInput}/>
+                        <Link to={{
+                            pathname: "/catalog",
+                            state:{search: inputText}
+                        }}>
+                            <Search className="header-searchIcon"/>
+                        </Link>
+                    </div>
+                    <div id="header-right">
+                        <Link to={!loggedinuser && "/login"} className="header-login">
+                            <div onClick={logoutUser} className="header_option">
+                                <span>Hello, {loggedinuser?.email}</span>
+                                <span>{loggedinuser ? 'Sign Out' : 'Sign In'}</span>
                             </div>
                         </Link>
-                </Container>
+                        <Link to="/checkout" className="header-checkout">
+                            <ShoppingBasket/>
+                            <span className="header-productCount">{basket?.length}</span>
+                        </Link>
+                    </div>
+                </div>
             </div>
             <div id="mobile-menu" onfocusout={changeMenuState}>
                 <Link to="/">

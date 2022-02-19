@@ -1,7 +1,56 @@
-/** Large screen CSS */
+/********************
+    General CSS
+********************/
+
+.header{
+    width: 100vw !important;
+    background-color: var(--secondary-colour);
+    height: var(--header-height);
+    padding: 0.5rem 1rem;
+}
+
+.header *{
+    color: var(--primary-colour);
+}
+
+/* Left Side Header */
+#header-left{
+    width: 30%;
+}
+
+/* Middle Header */
+#header-middle{
+    width: 40%;
+    display: flex;
+}
+
+/* Right Side Header */
+#header-right{
+    width: 30%;
+    display: flex;
+    justify-content: flex-end;
+    color: white
+}
+
+.header-checkout > .header-productCount{
+    margin: 0;
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    height: fit-content;
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+    background-color: rgba(119, 58, 28, 0.6);
+    border-radius: 0.6em;
+    border: 1px solid var(--primary-colour);
+}
+
+/********************
+  Large Screen CSS
+********************/
 @media (min-width: 768px){
+    /* Header */
     .header-desktop{
-        background-color: #883C00;
         display: flex;
         align-items: center;
         position: sticky;
@@ -12,14 +61,41 @@
         display: none;
     }
 
-    .header_logo{
-        width: 35px;
-        margin: 18px 20px;
+    #home{
+        width: 33%;
+    }
+
+    #header-left *{
+        max-height: 50px;
         object-fit: contain;
     }
-    .header_search{
+
+    #header-left img{
+        width: 70%;
+        padding-left: 5%;
+    }
+
+    #header-right > *{
         display: flex;
-        flex: 1;
+        justify-content: center;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    .header-checkout > svg{
+        width: 48px;
+        height: 48px;
+    }
+
+    .header-login, .header-checkout{
+        width: 50%;
+    }
+
+
+    .header-checkout > .header-productCount{
+        position: relative;
+        right: 5px;
+        top: 0;
     }
     .header_searchInput{
         height: 22px;
@@ -50,32 +126,27 @@
         text-decoration: none;
     }
 
-    .header-optionOne{
-        font-size: 10px;
-    }
-
-    .header-optionTwo{
-        font-size: 13px;
-        font-weight: 800;
-    }
-
     .header_optionBasket{
         display: flex;
         align-items: center;
     }
-
-
 
     #mobile-menu{
         display: none;
     }
 }
 
-/** Small screen CSS */
-
+/********************
+  Small Screen CSS
+********************/
 @media (max-width: 767.98px)
 {
-    .header-mobile * {
+    /* Main Header */
+    .header-desktop{
+        display:none;
+    }
+
+    .header-mobile *{
         height:50px;
         position:relative;
     }
@@ -85,61 +156,45 @@
     }
 
     .header-mobile{
-        width: 100vw !important;
         height: var(--header-height);
-        position:fixed;
+        position: fixed;
         top: 0;
         z-index: 100;
-        background-color: var(--secondary-colour);
         display: flex;
         justify-content:space-between;
         align-items: center;
 
     }
-    #header-right > .header-productCount{
-        margin: 0;
-        position: absolute;
-        right: 10px;
-        top: 0px;
-        padding-left: 0.2em;
-        padding-right: 0.2em;
-        background-color: rgba(119, 58, 28, 0.6);
-        border-radius: 0.6em;
-        border: 1px solid var(--primary-colour);
-        color: var(--primary-colour)
-    }
-    .header-checkout{
-        height: 50px;
-        width: 50px;
-    }
 
-    .header-productCount{
-        height: fit-content;
-    }
-
-    .header-desktop, .nav_links{
+    /* Left Side Header */
+    /* Removes the checkbox associated with the hamburger button.
+         This makes it so you just see and just click the hamburger button. */
+    #header-menu{
         display:none;
     }
+
+    /* Middle Header */
     .header-home{
         margin: auto;
     }
 
-    #header-left{
-        width: 30%;
-    }
-
-    #header-middle{
-        width: 40%;
-        display: flex;
-    }
-
-    #header-right{
-        width: 30%;
-    }
+    /* Right Side Header */
     #header-right > *{
-        margin: 10px;
+        margin: 5px;
+        width: 40px;
+        height: 40px;
     }
 
+    #header-right > svg{
+        margin-right: 10%;
+    }
+
+    .header-checkout > svg {
+        width: inherit;
+        height: inherit;
+    }
+
+    /* Scrolling Side Menu */
     #mobile-menu{
         display:block;
         position:fixed;
@@ -148,7 +203,7 @@
         top: 70px;
         transform: translateX(-100%);
         z-index:1000;
-        background-color: rgb(255,255,255);
+        background-color: var(--primary-colour);
     }
 
     #mobile-menu h1{
@@ -159,10 +214,6 @@
     #mobile-menu-user{
         position: absolute;
         bottom: 0;
-    }
-
-    #header-menu{
-        display:none;
     }
 
     .disable-menu{
@@ -177,41 +228,42 @@
         animation-duration: 1s;
         animation-fill-mode: both;
     }
+}
 
-    @keyframes rotate-cw {
-        0% {
-            transform: rotate(0);
-        }
-        100%{
-            transform: rotate(90deg);
-        }
+/********************
+      Keyframes
+********************/
+@keyframes rotate-cw {
+    0% {
+        transform: rotate(0);
     }
-
-    @keyframes rotate-ccw {
-        0% {
-            transform: rotate(90deg);
-        }
-        100%{
-            transform: rotate(0);
-        }
+    100%{
+        transform: rotate(90deg);
     }
+}
 
-    @keyframes slide-menu-on {
-        0%{
-            transform: translateX(-100%);
-        }
-        100% {
-            transform: translateX(0%);
-        }
+@keyframes rotate-ccw {
+    0% {
+        transform: rotate(90deg);
     }
-    @keyframes slide-menu-off {
-        0% {
-            transform: translateX(0%);
-        }
-        100% {
-            transform: translateX(-100%);
-        }
+    100%{
+        transform: rotate(0);
     }
+}
 
-
+@keyframes slide-menu-on {
+    0%{
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+@keyframes slide-menu-off {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
 }
