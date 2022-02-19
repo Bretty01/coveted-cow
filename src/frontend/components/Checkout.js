@@ -9,7 +9,7 @@ function Checkout(){
     const[{basket}] = useStateValue();
 
     return(
-        <div className="checkout">
+        <div className="checkout main">
             <div className="checkout-content">
                 {
                     basket.length === 0 ? (

@@ -1,23 +1,33 @@
 import React from 'react'
+import Facebook from '../images/svg/Facebook'
+import Youtube from '../images/svg/Youtube'
+import Instagram from '../images/svg/Instagram'
+import Twitter from '../images/svg/Twitter'
 import '../css/Footer.css'
 function Footer(){
     return(
-        <div className="footerArea">
-            <a href="#top">
-                Back To Top
-            </a>
-            <div className="footer_links">
-                <div className="footer_linkarea">
-                    <span>test</span>
+        <div className="footer-block">
+            <div className="footer-links">
+                <div className="footer-hours">
+                    <h3>Hours</h3>
+                    <div className="footer-content">
+                        <div><span>Sunday:</span><span>10:00am-4:00pm</span></div>
+                        <div><span>Monday:</span><span>9:00am-5:30pm</span></div>
+                        <div><span>Tuesday:</span><span>9:00am-5:30pm</span></div>
+                        <div><span>Wednesday:</span><span>9:00am-5:30pm</span></div>
+                        <div><span>Thursday:</span><span>9:00am-5:30pm</span></div>
+                        <div><span>Friday:</span><span>9:00am-7:00pm</span></div>
+                        <div><span>Saturday:</span><span>9:00am-7:00pm</span></div>
+                    </div>
                 </div>
-                <div className="footer_linkarea">
-                    <span>test</span>
-                </div>
-                <div className="footer_linkarea">
-                    <span>test</span>
-                </div>
-                <div className="footer_linkarea">
-                    <span>test</span>
+                <div className="footer-socials">
+                    <h3>Socials</h3>
+                    <div className="footer-content">
+                        <div><Facebook /><span>Facebook</span></div>
+                        <div><Instagram /><span>Instagram</span></div>
+                        <div><Twitter /><span>Twitter</span></div>
+                        <div><Youtube /><span>Youtube</span></div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -42,8 +42,6 @@ function ProductCard(props){
                     <strong>${products[0]?.price || "0"}</strong>
                 </p>
             </div>
-            { /*
-                <button onClick={addToBasket}>Add to Basket</button>*/ }
         </Link>
     )
 }

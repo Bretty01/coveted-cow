@@ -17,12 +17,19 @@ code {
 :root {
   --header-height: 70px;
 
-  --main-background: #ffffff;
-  --alt-background: #f2f2f2
+  --primary-colour: #ffffff;
+  --secondary-colour: #171717;
+  --accent-colour: #773a1c;
 }
 
 .button-generic {
-  background-color: var(--alt-background);
+  background-color: var(--primary-colour);
   border-radius: 0.3em;
-  border-color: #883C00;
+  font-weight: bold;
+  border-color: var(--secondary-colour);
+}
+
+.main {
+  min-height: calc(100vh - var(--header-height) - 240px);
+  margin-top: var(--header-height);
 }

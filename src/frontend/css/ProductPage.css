@@ -11,7 +11,7 @@ h2{
 
 strong{
     font-size: 2rem;
-    color: sandybrown;
+    color: var(--accent-colour)
 }
 
 .product-page-checkout > button {
@@ -20,12 +20,19 @@ strong{
 }
 
 .tab button.active {
+    background-color: white;
+}
+
+.tablinks{
+    width: 50%;
+    height: 3rem;
+    border: 2px solid black;
+    border-bottom: none;
     background-color: #ccc;
 }
 
-#specs > .container {
-    padding: 6px 12px;
-    border: 1px solid #ccc;
+#product-page-specs > .container {
+    border: 2px solid black;
     border-top: none;
 }
 
@@ -42,10 +49,6 @@ input[type=number] {
 }
 
 @media only screen and (max-width: 767.98px) {
-    #top{
-        margin-top: var(--header-height);
-    }
-
     #main-content > div {
         margin: 0 5%;
     }
@@ -79,19 +82,9 @@ input[type=number] {
      }
 
 
-     .tablinks{
-         width: 40%;
-         max-width: 150px;
-         height: 3rem;
-         border-bottom: none;
-         background-color: white;
-     }
 
-     #details > .container{
-         border: 2px solid black;
-     }
 
-    #main-content > .product-page-description{
+    #main-content > .product-page-description, #main-content > #product-page-specs{
         margin-top: 2rem;
         margin-bottom: 2rem;
     }

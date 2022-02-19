@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import {Search, ShoppingBasket, Menu} from "@material-ui/icons";
-import { Link } from 'react-router-dom';
+import React, {useState, useEffect} from 'react'
+import {Search, ShoppingBasket, Menu} from "@material-ui/icons"
+import { Link } from 'react-router-dom'
 import { useStateValue } from '../StateProvider.js'
-import '../css/Header.css';
+import '../css/Header.css'
+import Logo from '../images/svg/Logo'
 import {auth} from '../Firebase.js'
 import {Container} from 'react-bootstrap'
 import Alert from './Alert.js'
@@ -47,17 +48,21 @@ function Header() {
         <div>
             <div className="header">
                 <Container fluid className="header-mobile">
-                    <input type="checkbox" id="header-menu" onClick={() => changeMenuState()}/>
-                    <label className="btn" htmlFor="header-menu">
-                        <svg className="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true"
-                             id="header-menu-icon">
-                            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
-                        </svg>
-                    </label>
-                    <Link to="/" className="header-home">
-                        <img className="header_logo" src="https://www.svgrepo.com/show/191135/cow.svg" alt="logo"/>
-                    </Link>
-                    <div className="header-end">
+                    <div id="header-left">
+                        <input type="checkbox" id="header-menu" onClick={() => changeMenuState()}/>
+                        <label className="btn" htmlFor="header-menu">
+                            <svg className="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true"
+                                 id="header-menu-icon">
+                                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
+                            </svg>
+                        </label>
+                    </div>
+                    <div id="header-middle">
+                        <Link to="/" className="header-home">
+                            <Logo />
+                        </Link>
+                    </div>
+                    <div id="header-right">
                         <Search className="header-searchIcon"/>
                         <Link to="/checkout" className="header-checkout">
                             <ShoppingBasket/>
@@ -105,13 +110,15 @@ function Header() {
                 <Link to="/checkout">
                     <h1 onClick={() => changeMenuState()}>Checkout</h1>
                 </Link>
+                <div id="mobile-menu-user">
+                    <Link to={!loggedinuser && "/login"} className="header_link">
+                        <div onClick={logoutUser} className="header_option">
+                            <span className="header_optionOne">Hello, {loggedinuser?.email}</span>
+                            <span className="header_optionTwo">{loggedinuser ? 'Sign Out' : 'Sign In'}</span>
+                        </div>
+                    </Link>
+                </div>
 
-                <Link to={!loggedinuser && "/login"} className="header_link">
-                    <div onClick={logoutUser} className="header_option">
-                        <span className="header_optionOne">Hello, {loggedinuser?.email}</span>
-                        <span className="header_optionTwo">{loggedinuser ? 'Sign Out' : 'Sign In'}</span>
-                    </div>
-                </Link>
             </div>
             <Alert/>
         </div>

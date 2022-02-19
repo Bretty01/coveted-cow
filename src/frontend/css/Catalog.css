@@ -6,7 +6,7 @@
     top: var(--header-height);
     left: 0;
     bottom: 200px;
-    background-color: sandybrown;
+    background-color: var(--primary-colour);
     overflow-x: hidden;
     padding-top: 20px;
 }
@@ -50,7 +50,7 @@
     }
 
     .mobile-sortFilter {
-        background-color: sandybrown;
+        background-color: var(--secondary-colour);
         margin-top: var(--header-height);
         display: flex;
         flex-direction: column;

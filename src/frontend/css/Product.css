@@ -8,7 +8,7 @@ a:link, a:visited{
 }
 
 .product_price{
-    color: sandybrown;
+    color: var(--accent-colour)
 }
 
 .product{
@@ -20,6 +20,7 @@ a:link, a:visited{
 }
 
 .product:hover{
+    color: var(--secondary-colour);
     animation-name: scale-up-center;
     animation-duration: 500ms;
     animation-fill-mode: forwards;
@@ -94,9 +95,9 @@ a:link, a:visited{
 
 @keyframes scale-up-center {
     0% {
-        background-color: var(--main-background)
+        border: none;
     }
     100% {
-        background-color: var(--alt-background)
+        border: 0.1rem solid var(--secondary-colour)
     }
 }

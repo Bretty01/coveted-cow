@@ -7,7 +7,7 @@ import ProductService from "../utilities/product-service.js"
 function Home(){
     return(
 
-        <div id="top" className="home">
+        <div className="home main">
             <Carousel fade controls={false} id="home-carousel" className="d-block m-3">
                 <Carousel.Item>
                     <img

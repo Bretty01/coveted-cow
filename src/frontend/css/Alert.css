@@ -1,5 +1,7 @@
 #alert-box{
     position: fixed;
+    display: flex;
+    flex-direction: row;
     bottom: -500px;
     z-index: 999;
     text-align: center;
@@ -9,12 +11,25 @@
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     border-bottom: none;
+    background-color: var(--primary-colour);
 }
 
-#alert-box > img {
-    height: 50px;
-    width: 50px;
-    float: left;
+#alert-box > * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#alert-left{
+    width: 60px;
+}
+
+#alert-right{
+    width: 100%;
+}
+
+#alert-left > img {
+    height:60px;
 }
 
 .enable{
@@ -23,32 +38,19 @@
     animation-fill-mode: both;
 }
 
-.error{
-    background-color: lightcoral;
-}
-
 .error > #alert-icon{
     content: url(https://www.svgrepo.com/show/379869/close-circle.svg);
-}
-
-.success{
-    background-color: lightgreen;
+    fill: darkred;
 }
 
 .success > #alert-icon{
     content: url(https://www.svgrepo.com/show/379856/checkmark-circle.svg);
-}
-
-.notice{
-    background-color: darkorange;
+    color: darkgreen;
 }
 
 .notice > #alert-icon{
-    content: url(https://www.svgrepo.com/show/379754/exclamation-mark.svg)
-}
-
-.error img{
-    content: url()
+    content: url(https://www.svgrepo.com/show/379754/exclamation-mark.svg);
+    color: darkorange;
 }
 
 @keyframes slide-up {

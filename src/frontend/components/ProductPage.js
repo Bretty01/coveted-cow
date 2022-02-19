@@ -84,7 +84,7 @@ const ProductPage = props => {
         e.currentTarget.className += " active";
     }
     return(
-        <div id="top">
+        <div className="main">
             { isRendered ? (
                 <div id="main-content">
                     <h2>{product.name}</h2>
@@ -102,7 +102,7 @@ const ProductPage = props => {
                     </div>
                     <div className="product-page-description">{product.product_description.details}</div>
 
-                    <div id="specs">
+                    <div id="product-page-specs">
                         <div className="tab">
                             <button className="tablinks" onClick={(e) => swapTabs(e, "details")}>Details</button>
                             <button className="tablinks" onClick={(e) => swapTabs(e, "dimensions")}>Dimensions</button>
