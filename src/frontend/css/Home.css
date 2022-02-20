@@ -6,15 +6,19 @@
 }
 
 #home-carousel{
-    max-height: 400px;
+    height: 40vh;
 }
 
-.carousel-caption{
-    right: 0 !important;
-    left: 0 !important;
+.carousel-item > .carousel-caption{
+    top: 10%;
+    right: 0;
+    left: 0;
 }
 
-
+.carousel-item > img{
+    max-height: 30vh;
+    width: 100%;
+}
 
 .active > img{
     object-fit: contain;
@@ -38,12 +42,4 @@ h1{
         padding-top: 70px;
     }
 
-    #home-carousel{
-        height: 45vh;
-    }
-
-    .carousel-item > img{
-        max-height: 30vh;
-        width: 100%;
-    }
 }

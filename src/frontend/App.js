@@ -64,7 +64,6 @@ function App() {
                 </Route>
                 <Route path="/">
                     <Header/>
-                    <Navlinks/>
                     <Home/>
                     <Footer/>
                 </Route>

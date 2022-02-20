@@ -146,37 +146,6 @@ function Catalog() {
 
     return (
         <div className="main">
-            <div class="sidebar">
-                <Dropdown>
-                    <Dropdown.Toggle id="sortMenu">
-                        Sort By...
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                        <Dropdown.Item onClick={() => applySort("name", 1)}>A-Z</Dropdown.Item>
-                        <Dropdown.Item onClick={() => applySort("name", -1)}>Z-A</Dropdown.Item>
-                        <Dropdown.Item onClick={() => applySort("price", 1)}>Price: Low to High</Dropdown.Item>
-                        <Dropdown.Item onClick={() => applySort("price", -1)}>Price: High to Low</Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
-                <br/>
-                <Form>
-                    <Form.Check type="checkbox" label="0-19.99" onClick={(e) => setPriceFilter(0, 19.99, e)}/>
-                    <Form.Check type="checkbox" label="20-29.99" onClick={(e) => setPriceFilter(20, 29.99, e)}/>
-                    <Form.Check type="checkbox" label="30-49.99" onClick={(e) => setPriceFilter(30, 49.99, e)}/>
-                    <Form.Check type="checkbox" label="50-99.99" onClick={(e) => setPriceFilter(50, 99.99, e)}/>
-                    <Form.Check type="checkbox" label="100-199.99" onClick={(e) => setPriceFilter(100, 199.99, e)}/>
-                    <Form.Check type="checkbox" label="200-299.99" onClick={(e) => setPriceFilter(200, 299.99, e)}/>
-                </Form>
-                <br/>
-                <Form id="brandFilter">
-                    {brandFilters.map(brand => {
-                        return(
-                            <Form.Check type="checkbox" label={brand}
-                                        onClick={(e) => setBrandFilter(brand, e)}/>
-                        )
-                    })}
-                </Form>
-            </div>
             <div className="mobile-sortFilter">
                 <div id="sortFilter-buttons">
                     <button type="button" className="button-generic" id="button-filter"
@@ -213,8 +182,38 @@ function Catalog() {
                     </Form>
                 </div>
             </div>
-
             <div className="catalog-content">
+                <div className="sidebar">
+                    <Dropdown>
+                        <Dropdown.Toggle id="sortMenu">
+                            Sort By...
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                            <Dropdown.Item onClick={() => applySort("name", 1)}>A-Z</Dropdown.Item>
+                            <Dropdown.Item onClick={() => applySort("name", -1)}>Z-A</Dropdown.Item>
+                            <Dropdown.Item onClick={() => applySort("price", 1)}>Price: Low to High</Dropdown.Item>
+                            <Dropdown.Item onClick={() => applySort("price", -1)}>Price: High to Low</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                    <br/>
+                    <Form>
+                        <Form.Check type="checkbox" label="0-19.99" onClick={(e) => setPriceFilter(0, 19.99, e)}/>
+                        <Form.Check type="checkbox" label="20-29.99" onClick={(e) => setPriceFilter(20, 29.99, e)}/>
+                        <Form.Check type="checkbox" label="30-49.99" onClick={(e) => setPriceFilter(30, 49.99, e)}/>
+                        <Form.Check type="checkbox" label="50-99.99" onClick={(e) => setPriceFilter(50, 99.99, e)}/>
+                        <Form.Check type="checkbox" label="100-199.99" onClick={(e) => setPriceFilter(100, 199.99, e)}/>
+                        <Form.Check type="checkbox" label="200-299.99" onClick={(e) => setPriceFilter(200, 299.99, e)}/>
+                    </Form>
+                    <br/>
+                    <Form id="brandFilter">
+                        {brandFilters.map(brand => {
+                            return (
+                                <Form.Check type="checkbox" label={brand}
+                                            onClick={(e) => setBrandFilter(brand, e)}/>
+                            )
+                        })}
+                    </Form>
+                </div>
                 <div class="row">
                     {productList.map(product => {
                         return(

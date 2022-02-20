@@ -1,12 +1,17 @@
+.catalog-content > .row > *{
+    max-width: 95%;
+}
+
 .sidebar {
     height: 100%;
     width: 240px;
     position: fixed;
     z-index: 0;
-    top: var(--header-height);
+    top: calc(var(--header-height) * 2);
     left: 0;
     bottom: 200px;
-    background-color: var(--primary-colour);
+    colour: var(--primary-colour);
+    background-color: var(--secondary-colour);
     overflow-x: hidden;
     padding-top: 20px;
 }
@@ -23,8 +28,12 @@
 }
 
 @media (min-width: 768px) {
+    .catalog-content > .row{
+        margin-left: 240px;
+    }
+
     .catalog-content {
-        margin-left: 250px;
+        margin-top: calc(var(--header-height) * 2);
     }
 
 }
@@ -48,6 +57,8 @@
         margin-right: 0;
         margin-left: 0;
     }
+
+
 
     .mobile-sortFilter {
         background-color: var(--secondary-colour);

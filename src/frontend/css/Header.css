@@ -53,12 +53,16 @@
     .header-desktop{
         display: flex;
         align-items: center;
-        position: sticky;
-        top:0;
-        z-index: 2;
     }
     .header-mobile{
         display: none;
+    }
+
+    .header-desktop-block{
+        position: fixed;
+        top:0px;
+        left: 0px;
+        z-index: 2;
     }
 
     #home{

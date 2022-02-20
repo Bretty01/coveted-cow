@@ -2,8 +2,8 @@
     background-color: var(--secondary-colour);
     width: 100%;
     min-height: 240px;
+    position: absolute;
     color: white;
-    z-index: 2;
     display: flex;
     flex-direction: column;
     padding-top: 1rem;

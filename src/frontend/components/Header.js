@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {Search, ShoppingBasket, Menu} from "@material-ui/icons"
 import { Link } from 'react-router-dom'
 import { useStateValue } from '../StateProvider.js'
+import Navlinks from './Navlinks.js'
 import '../css/Header.css'
 import Logo from '../images/svg/Logo'
 import {auth} from '../Firebase.js'
@@ -46,7 +47,7 @@ function Header() {
 
     return(
         <div>
-            <div>
+            <div className="header-desktop-block">
                 <div className="header header-mobile">
                     <div id="header-left">
                         <input type="checkbox" id="header-menu" onClick={() => changeMenuState()}/>
@@ -71,32 +72,35 @@ function Header() {
                     </div>
 
                 </div>
-                <div className="header header-desktop">
-                    <Link to="/" id="header-left" >
-                        <Logo />
-                        <img src="https://fontmeme.com/permalink/220219/4690785ad27bbbaacf4dcf2e65c29223.png" />
-                    </Link>
-                    <div id="header-middle">
-                        <input type="text" className="header_searchInput" onChange={handleInput}/>
-                        <Link to={{
-                            pathname: "/catalog",
-                            state:{search: inputText}
-                        }}>
-                            <Search className="header-searchIcon"/>
+                <div >
+                    <div className="header header-desktop">
+                        <Link to="/" id="header-left" >
+                            <Logo />
+                            <img src="https://fontmeme.com/permalink/220219/4690785ad27bbbaacf4dcf2e65c29223.png" />
                         </Link>
+                        <div id="header-middle">
+                            <input type="text" className="header_searchInput" onChange={handleInput}/>
+                            <Link to={{
+                                pathname: "/catalog",
+                                state:{search: inputText}
+                            }}>
+                                <Search className="header-searchIcon"/>
+                            </Link>
+                        </div>
+                        <div id="header-right">
+                            <Link to={!loggedinuser && "/login"} className="header-login">
+                                <div onClick={logoutUser} className="header_option">
+                                    <span>Hello, {loggedinuser?.email}</span>
+                                    <span>{loggedinuser ? 'Sign Out' : 'Sign In'}</span>
+                                </div>
+                            </Link>
+                            <Link to="/checkout" className="header-checkout">
+                                <ShoppingBasket/>
+                                <span className="header-productCount">{basket?.length}</span>
+                            </Link>
+                        </div>
                     </div>
-                    <div id="header-right">
-                        <Link to={!loggedinuser && "/login"} className="header-login">
-                            <div onClick={logoutUser} className="header_option">
-                                <span>Hello, {loggedinuser?.email}</span>
-                                <span>{loggedinuser ? 'Sign Out' : 'Sign In'}</span>
-                            </div>
-                        </Link>
-                        <Link to="/checkout" className="header-checkout">
-                            <ShoppingBasket/>
-                            <span className="header-productCount">{basket?.length}</span>
-                        </Link>
-                    </div>
+                    <Navlinks />
                 </div>
             </div>
             <div id="mobile-menu" onfocusout={changeMenuState}>

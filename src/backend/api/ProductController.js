@@ -2,7 +2,7 @@ import ProductInfoDAO from "../dao/ProductInfoDao.js"
 
 export default class ProductController {
     static async getProducts(req, res, next) {
-        const productsPerPage = req.query.productsPerPage ? parseInt(req.query.product) : 12
+        const productsPerPage = req.query.productsPerPage ? parseInt(req.query.product) : 20
         const page = req.query.page ? parseInt(req.query.page, 10) : 0
         let filters = null
         let sort = null
