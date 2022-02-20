@@ -3,6 +3,14 @@
     display: flex;
     justify-content: space-around;
 }
+#main-content > div {
+    margin: 3%;
+}
+
+.remaining-quantity{
+    width: 100%;
+}
+
 h2{
     text-align: center;
     padding-top: 1.5rem;
@@ -14,9 +22,41 @@ strong{
     color: var(--accent-colour)
 }
 
-.product-page-checkout > button {
+.product-page-checkout{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-page-checkout *{
+    height: 3em;
+}
+
+.product-page-checkout > div{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.product-page-checkout button {
     background-color: #883C00;
     color: white;
+    width: 80%;
+}
+
+.product-page-checkout  input {
+    width: 3em;
+}
+
+.product-page-sales > *{
+    display: flex;
+    flex-direction: column;
+}
+
+#details > .row{
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
 }
 
 .tab button.active {
@@ -31,7 +71,7 @@ strong{
     background-color: #ccc;
 }
 
-#product-page-specs > .container {
+#product-page-specs > .specs-details {
     border: 2px solid black;
     border-top: none;
 }
@@ -48,11 +88,28 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
-@media only screen and (max-width: 767.98px) {
-    #main-content > div {
-        margin: 0 5%;
+@media only screen and (min-width: 768px) {
+    #main-content{
+        margin: calc(var(--header-height) * 2) 5% 5% 5%;
+
     }
 
+    .product-image {
+        max-width: 60%;
+        padding: 5%;
+    }
+
+    .product-page-sales{
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+
+}
+
+@media only screen and (max-width: 767.98px) {
     .product-page-upper{
         flex-direction: column;
     }
@@ -60,43 +117,5 @@ input[type=number] {
     .product-page-upper > div, img{
         width: 100%;
     }
-
-    .product-page-checkout{
-        height: 5rem;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .product-page-checkout > input {
-        width: 3em;
-    }
-
-    .product-page-checkout > button {
-        width: 80%;
-    }
-
-     .product-page-checkout *{
-         height: 3em;
-     }
-
-
-
-
-    #main-content > .product-page-description, #main-content > #product-page-specs{
-        margin-top: 2rem;
-        margin-bottom: 2rem;
-    }
-
-     #main-content > #details {
-         margin-bottom: 5%;
-     }
-
-     #details .row{
-         padding-top: 0.2rem;
-         padding-bottom: 0.2rem;
-     }
-
 
 }

@@ -83,6 +83,16 @@ const ProductPage = props => {
         document.getElementById(tab).style.display = "block";
         e.currentTarget.className += " active";
     }
+
+    const getFutureDate = () => {
+        const date = new Date()
+        var tomorrow = new Date().setDate(date.getDate() + 1)
+        var fiveDays = new Date().setDate(date.getDate() + 5)
+        tomorrow = new Date(tomorrow)
+        fiveDays = new Date(fiveDays)
+        return tomorrow.toDateString() + " to " + fiveDays.toDateString()
+    }
+
     return(
         <div className="main">
             { isRendered ? (
@@ -92,11 +102,20 @@ const ProductPage = props => {
                         <img className="product-image" src={product.image ||
                         "https://c.tenor.com/I6kN-6X7nhAAAAAi/loading-buffering.gif"} />
                         <div className="product-page-sales">
-                            <p><strong>${product.price}</strong></p>
-                            <div className="product-page-checkout">
-                                <input type="number" id="input-quantity" className="button-generic"
-                                       min="0" max="50"/>
-                                <button className="button-generic" onClick={addToBasket}>Add to Checkout</button>
+                            <div className="sales-upper">
+                                <p><strong>${product.price}</strong></p>
+                                <div className="product-page-ratings">*Rating goes here*</div>
+                            </div>
+                            <div className="sales-middle">
+                                <p>Expect your product to arrive anywhere from {getFutureDate()}</p>
+                            </div>
+                            <div className="product-page-checkout sales-bottom">
+                                <span className="remaining-quantity">23 remaining units</span>
+                                <div>
+                                    <input type="number" id="input-quantity" className="button-generic"
+                                           min="0" max="50"/>
+                                    <button className="button-generic" onClick={addToBasket}>Add to Checkout</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -107,7 +126,7 @@ const ProductPage = props => {
                             <button className="tablinks" onClick={(e) => swapTabs(e, "details")}>Details</button>
                             <button className="tablinks" onClick={(e) => swapTabs(e, "dimensions")}>Dimensions</button>
                         </div>
-                        <div className="container">
+                        <div className="specs-details">
                             <div id="details" className="content">
                                 <div className="row">
                                     <div className="col-4">SKU</div>
