@@ -222,22 +222,24 @@ function Catalog() {
                             />
                         )
                     })}
+                    <div className="page-buttons">
+                        <button type="button" id="prevButton" className="button-generic" href=".main"
+                                onClick={() => {
+                                    setCurrentPage(page => page - 1)
+                                }}>Previous
+                        </button>
+                        <p>Page {data.page + 1} of {lastPage}</p>
+                        <button type="button" id="nextButton" className="button-generic" href=".main"
+                                onClick={() => {
+                                    setCurrentPage(page => page + 1)
+                                }}>Next
+                        </button>
+                    </div>
                 </div>
+
             </div>
-            <div className="page-buttons">
-                <button type="button" id="prevButton" className="button-generic" href=".main"
-                        onClick={() => {
-                            setCurrentPage(page => page - 1)
-                        }}>Previous
-                </button>
-                <p>Page {data.page + 1} of {lastPage}</p>
-                <button type="button" id="nextButton" className="button-generic" href=".main"
-                        onClick={() => {
-                            setCurrentPage(page => page + 1)
-                        }}>Next
-                </button>
             </div>
-        </div>
+
     )
 }
 

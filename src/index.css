@@ -24,9 +24,10 @@ code {
 
 .button-generic {
   background-color: var(--primary-colour);
+  color: var(--accent-colour);
   border-radius: 0.3em;
   font-weight: bold;
-  border-color: var(--secondary-colour);
+  border-color: var(--accent-colour);
 }
 
 .main {

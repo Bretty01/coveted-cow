@@ -26,6 +26,31 @@
     border-color: #a88734 #9c7e31 #846a29;
 }
 
+@media (min-width: 768px) {
+    .productCart-info{
+        width: 100%;
+    }
+    .productCart-info > div{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .productCart-info > button{
+        width: 100%;
+    }
+
+    .productCart-upper{
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    .subtotal{
+        position: sticky;
+        top: 200px;
+    }
+}
+
 @media (max-width: 767.98px) {
     .productCart{
         height: max-content;
@@ -36,7 +61,6 @@
     .productCart-upper{
         margin-left: auto;
         margin-right: auto;
-        width: 50%;
     }
 
     .productCart-image{

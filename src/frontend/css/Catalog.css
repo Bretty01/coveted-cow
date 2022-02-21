@@ -30,10 +30,11 @@
 @media (min-width: 768px) {
     .catalog-content > .row{
         margin-left: 240px;
+        justify-content: space-evenly;
     }
 
     .catalog-content {
-        margin-top: calc(var(--header-height) * 2);
+        margin-top: calc(var(--header-height) * 2 + 15px);
     }
 
 }
