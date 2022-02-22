@@ -13,6 +13,16 @@
     color: var(--primary-colour);
 }
 
+.header a{
+    text-decoration: none;
+}
+
+.header svg:hover{
+    border-color: 1px solid var(--accent-colour);
+    color: var(--accent-colour);
+    fill: var(--accent-colour);
+}
+
 /* Left Side Header */
 #header-left{
     width: 30%;
@@ -106,6 +116,7 @@
         padding: 5px;
         border: none;
         width: 100%;
+        color: var(--secondary-colour);
     }
 
     .header-searchIcon{

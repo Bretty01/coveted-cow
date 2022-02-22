@@ -47,7 +47,7 @@ function Header() {
 
     return(
         <div>
-            <div className="header-desktop-block">
+            <div>
                 <div className="header header-mobile">
                     <div id="header-left">
                         <input type="checkbox" id="header-menu" onClick={() => changeMenuState()}/>
@@ -72,7 +72,7 @@ function Header() {
                     </div>
 
                 </div>
-                <div >
+                <div className="header-desktop-block">
                     <div className="header header-desktop">
                         <Link to="/" id="header-left" >
                             <Logo />
