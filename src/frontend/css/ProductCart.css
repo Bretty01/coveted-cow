@@ -20,10 +20,7 @@
 }
 
 .productCart-info > button{
-    background-color: #f0c14b;
-    border: 1px solid;
-    margin-top: 10px;
-    border-color: #a88734 #9c7e31 #846a29;
+    width: 50%;
 }
 
 @media (min-width: 768px) {
@@ -37,7 +34,9 @@
     }
 
     .productCart-info > button{
-        width: 100%;
+        display: block;
+        width: 50%;
+        margin: 0.5rem auto;
     }
 
     .productCart-upper{

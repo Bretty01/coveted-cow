@@ -23,11 +23,18 @@ code {
 }
 
 .button-generic {
-  background-color: var(--primary-colour);
   color: var(--accent-colour);
   border-radius: 0.3em;
   font-weight: bold;
   border-color: var(--accent-colour);
+  padding: 0.5rem 0;
+}
+
+.button-secondary {
+  color: var(--primary-colour) !important;
+  font-weight: 900;
+  border: 1px solid var(--primary-colour);
+  background-color: var(--secondary-colour);
 }
 
 .main {

@@ -11,6 +11,10 @@
     border-bottom: 1px solid lightgray;
 }
 
+.basket-zero{
+    text-align: center;
+}
+
 @media (min-width: 768px) {
     .checkout{
         margin-top: calc(var(--header-height) * 2)
@@ -18,6 +22,11 @@
 
     .checkout-content{
         width: 75%;
+        border-right: 1px solid var(--secondary-colour);
+    }
+
+    .checkout-subtotal{
+        margin: 0 auto;
     }
 }
 

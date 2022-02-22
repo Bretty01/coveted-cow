@@ -1,7 +1,19 @@
 .subtotal{
     padding: 10px;
 }
-.checkout_button{
-    padding: 8px;
-    margin: 5px;
+
+.button-checkout{
+    display: block;
+    width: 90%;
+    margin: auto;
+}
+
+.subtotal > div{
+    display: flex;
+    justify-content:space-between;
+    margin: 0.2rem;
+}
+
+.subtotal > button{
+    margin-top: 1rem;
 }

@@ -6,14 +6,21 @@
     height: 100%;
     width: 240px;
     position: fixed;
-    z-index: 0;
     top: calc(var(--header-height) * 2);
     left: 0;
     bottom: 200px;
-    colour: var(--primary-colour);
+    color: var(--primary-colour);
     background-color: var(--secondary-colour);
     overflow-x: hidden;
+    overflow-y: scroll;
     padding-top: 20px;
+    text-align: center;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.sidebar::-webkit-scrollbar{
+    display: none;
 }
 
 .mobile-sortFilter {
@@ -24,7 +31,13 @@
     display: flex;
     justify-content: space-evenly;
     align-items: baseline;
-    width: 100%;
+    width: 50%;
+    margin: 1rem auto;
+    text-align: center;
+}
+
+.page-buttons > *{
+    width: 25%;
 }
 
 @media (min-width: 768px) {
@@ -37,6 +50,73 @@
         margin-top: calc(var(--header-height) * 2 + 15px);
     }
 
+    .sidebar > div {
+        margin: 0 auto 2rem;
+        width: 70%;
+    }
+
+    .sidebar h4 {
+        color: var(--primary-colour);
+    }
+
+    .sort-content {
+        display: none;
+        position: absolute;
+        border: 2px solid white;
+        background-color: var(--secondary-colour);
+        color: var(--primary-colour);
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(255,255,255,0.2);
+        z-index: 1;
+    }
+
+    .dropdown-sort a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        border: 2px solid transparent;
+    }
+
+    .dropdown-sort a:hover {
+        cursor: pointer;
+        color: var(--accent-colour) !important;
+        border-color: var(--accent-colour);
+    }
+
+    .dropdown-sort:hover .sort-content{
+        display: block;
+    }
+
+    .dropdown-sort > .button-secondary{
+        width: 100%;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .filter-price > *{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .filter-price > div > *{
+        width: 33%;
+        margin-bottom: 0.2rem;
+        text-align: center;
+    }
+
+
+    #brandFilter > button{
+        margin: 0.1rem;
+        width: 100%;
+    }
+
+    #brandFilter > .on{
+        border-color: var(--accent-colour);
+        color: var(--accent-colour) !important;
+        background-color: var(--primary-colour) !important;
+    }
 }
 
 @media only screen and (max-width:767.98px) {

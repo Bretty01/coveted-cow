@@ -2,12 +2,14 @@ import React, {useState, useEffect} from 'react'
 import {useLocation} from 'react-router-dom'
 import Product from './ProductCard.js'
 import ProductService from '../utilities/product-service.js'
+import {setAlert} from './Alert.js'
 import "../css/Catalog.css"
 import Dropdown from 'react-bootstrap/Dropdown'
 import Form from 'react-bootstrap/Form'
+
 function Catalog() {
     const location = useLocation()
-    const search = location.state || ""
+    const search = location.state ? location.state.search : ""
     const[productList, setProductList] = useState([])
     const[data, setData] = useState([])
     const[lastPage, setLastPage] = useState(1)
@@ -100,28 +102,34 @@ function Catalog() {
         setSort(`${type},${order}`)
     }
 
-    const setPriceFilter = (lowVal, highVal, event) => {
+    const setPriceFilter = (event) => {
+        const lowVal = parseFloat(document.getElementById("price-low").value)
+        const highVal = parseFloat(document.getElementById("price-high").value)
         let index = -1
         let currentFilter = filters
-        if(event.target.checked) {
-            currentFilter["price"].push({"lowValue":lowVal, "highValue":highVal})
-        } else {
-            index = currentFilter["price"].map(function(o) {return o.lowValue}).indexOf(lowVal)
-            if(index !== -1) {
-                currentFilter["price"].splice(index, 1)
+        if(lowVal && highVal) {
+            if(currentFilter["price"]){
+                currentFilter["price"] = []
             }
+            currentFilter["price"].push({"lowValue":lowVal, "highValue":highVal})
+        }
+        else {
+            currentFilter["price"] = []
         }
         setFilters(currentFilter)
         setCurrentPage(0)
         createQuery()
     }
 
-    const setBrandFilter = (brand, event) => {
+    const setBrandFilter = (event) => {
+        const brand = event.target.value
         let index = -1
         let currentFilter = filters
-        if(event.target.checked) {
+        if(event.target.classList[2] === "off") {
+            event.target.className = "button-brand button-secondary on"
             currentFilter["brand"].push(brand)
         } else {
+            event.target.className = "button-brand button-secondary off"
             index = currentFilter["brand"].indexOf(brand)
             if(index !== -1) {
                 currentFilter["brand"].splice(index, 1)
@@ -184,35 +192,34 @@ function Catalog() {
             </div>
             <div className="catalog-content">
                 <div className="sidebar">
-                    <Dropdown>
-                        <Dropdown.Toggle id="sortMenu">
-                            Sort By...
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu>
-                            <Dropdown.Item onClick={() => applySort("name", 1)}>A-Z</Dropdown.Item>
-                            <Dropdown.Item onClick={() => applySort("name", -1)}>Z-A</Dropdown.Item>
-                            <Dropdown.Item onClick={() => applySort("price", 1)}>Price: Low to High</Dropdown.Item>
-                            <Dropdown.Item onClick={() => applySort("price", -1)}>Price: High to Low</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
-                    <br/>
-                    <Form>
-                        <Form.Check type="checkbox" label="0-19.99" onClick={(e) => setPriceFilter(0, 19.99, e)}/>
-                        <Form.Check type="checkbox" label="20-29.99" onClick={(e) => setPriceFilter(20, 29.99, e)}/>
-                        <Form.Check type="checkbox" label="30-49.99" onClick={(e) => setPriceFilter(30, 49.99, e)}/>
-                        <Form.Check type="checkbox" label="50-99.99" onClick={(e) => setPriceFilter(50, 99.99, e)}/>
-                        <Form.Check type="checkbox" label="100-199.99" onClick={(e) => setPriceFilter(100, 199.99, e)}/>
-                        <Form.Check type="checkbox" label="200-299.99" onClick={(e) => setPriceFilter(200, 299.99, e)}/>
-                    </Form>
-                    <br/>
-                    <Form id="brandFilter">
+                    <div className="dropdown-sort">
+                        <button className="button-secondary">Sort By...</button>
+                        <div className="sort-content">
+                            <a onClick={() => applySort("name", 1)}>A-Z</a>
+                            <a onClick={() => applySort("name", -1)}>Z-A</a>
+                            <a onClick={() => applySort("price", 1)}>Price: Low to High</a>
+                            <a onClick={() => applySort("price", -1)}>Price: High to Low</a>
+                        </div>
+                    </div>
+                    <div className="filter-price">
+                        <h4>Price</h4>
+                        <div>
+                            <input type="number" id="price-low"/>
+                            <span>to</span>
+                            <input type="number" id="price-high"/>
+                        </div>
+                        <button className="button-secondary" onClick={(e) => setPriceFilter(e)}>Update</button>
+                    </div>
+                    <div id="brandFilter">
+                        <h4>Brand</h4>
                         {brandFilters.map(brand => {
                             return (
-                                <Form.Check type="checkbox" label={brand}
-                                            onClick={(e) => setBrandFilter(brand, e)}/>
+                                <button className="button-brand button-secondary off" value={brand}
+                                        onClick={(e) => setBrandFilter(e)}>{brand}</button>
                             )
                         })}
-                    </Form>
+
+                    </div>
                 </div>
                 <div class="row">
                     {productList.map(product => {
@@ -238,7 +245,7 @@ function Catalog() {
                 </div>
 
             </div>
-            </div>
+        </div>
 
     )
 }

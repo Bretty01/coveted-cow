@@ -38,7 +38,7 @@ function ProductCart({id, name, image, price, quantity, total}){
                     //TODO: Add rating system.
                 }
 
-                <button onClick={removeItem}>Remove</button>
+                <button class="button-generic" onClick={removeItem}>Remove</button>
             </div>
         </div>
     )
