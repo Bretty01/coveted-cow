@@ -3,6 +3,12 @@
     display: flex;
     justify-content: space-around;
 }
+
+.specs-details .row{
+    border-top: 1px solid var(--secondary-colour);
+    margin-left: 0!important;
+}
+
 #main-content > div {
     margin: 3%;
 }
@@ -11,7 +17,8 @@
     width: 100%;
 }
 
-h2{
+#main-content > strong{
+    display: block;
     text-align: center;
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
@@ -54,13 +61,16 @@ strong{
     flex-direction: column;
 }
 
-#details > .row{
+#details > .row, #dimensions > .row{
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
 }
 
 .tab button.active {
     background-color: white;
+    color: var(--accent-colour);
+    font-weight: 900;
+    border-bottom: 1px solid var(--secondary-colour);
 }
 
 .tablinks{
@@ -69,6 +79,7 @@ strong{
     border: 2px solid black;
     border-bottom: none;
     background-color: #ccc;
+    border-bottom: 1px solid transparent;
 }
 
 #product-page-specs > .specs-details {

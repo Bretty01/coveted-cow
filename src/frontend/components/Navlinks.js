@@ -5,10 +5,9 @@ function Navlinks(){
     return(
         <div className="nav-links">
             <Link to="/catalog" className="button-secondary">Products</Link>
-            <Link className="button-secondary">Customer Service</Link>
-            <Link className="button-secondary">Gift Cards</Link>
-            <Link className="button-secondary">Registry</Link>
-            <Link className="button-secondary">Sell</Link>
+            <Link className="button-secondary">About</Link>
+            <Link className="button-secondary">Account</Link>
+            <Link className="button-secondary">Locations</Link>
         </div>
     )
 }

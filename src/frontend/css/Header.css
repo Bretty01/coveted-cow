@@ -23,6 +23,10 @@
     fill: var(--accent-colour);
 }
 
+.header-searchInput{
+    color: var(--secondary-colour);
+}
+
 /* Left Side Header */
 #header-left{
     width: 30%;
@@ -111,7 +115,7 @@
         right: 5px;
         top: 0;
     }
-    .header_searchInput{
+    .header-searchInput{
         height: 22px;
         padding: 5px;
         border: none;
@@ -209,21 +213,63 @@
         height: inherit;
     }
 
+    /* Mobile Search Box */
+    #mobile-searchbar{
+        position: fixed;
+        top: -50px;
+        z-index: 99;
+        width: 100vw;
+        background-color: var(--secondary-colour);
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+        border-bottom-left-radius: 0.5em;
+        border-bottom-right-radius: 0.5em;
+    }
+
+    .header-searchInput{
+        width: 75%;
+    }
+
+    .header-searchIcon{
+        text-decoration: none;
+        color: var(--primary-colour);
+    }
+
+    .visible{
+        animation-name: show-searchbar;
+        animation-duration: 300ms;
+        animation-fill-mode: forwards;
+    }
+
     /* Scrolling Side Menu */
     #mobile-menu{
         display:block;
         position:fixed;
         height: calc(100vh - var(--header-height));
-        width: 70%;
+        width: 50%;
         top: 70px;
         transform: translateX(-100%);
         z-index:1000;
-        background-color: var(--primary-colour);
+        background-color: var(--secondary-colour);
+    }
+
+    #mobile-menu a{
+        display: block;
+        padding: 10px;
+        text-decoration: none;
+        border-radius: 0.5em;
+        border: 2px solid transparent;
+        color: var(--primary-colour);
+    }
+
+    #mobile-menu a:hover{
+        color: var(--accent-colour);
+        border: 2px solid var(--accent-colour);
     }
 
     #mobile-menu h1{
         text-align: left;
-        padding: 10px;
     }
 
     #mobile-menu-user{
@@ -280,5 +326,14 @@
     }
     100% {
         transform: translateX(-100%);
+    }
+}
+
+@keyframes show-searchbar {
+    0% {
+        top: -50px;
+    }
+    100% {
+        top: var(--header-height);
     }
 }

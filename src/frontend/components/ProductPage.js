@@ -97,7 +97,7 @@ const ProductPage = props => {
         <div className="main">
             { isRendered ? (
                 <div id="main-content">
-                    <h2>{product.name}</h2>
+                    <strong>{product.name}</strong>
                     <div className="product-page-upper">
                         <img className="product-image" src={product.image ||
                         "https://c.tenor.com/I6kN-6X7nhAAAAAi/loading-buffering.gif"} />

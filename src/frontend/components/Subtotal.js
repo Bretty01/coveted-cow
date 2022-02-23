@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import CurrencyFormat from 'react-currency-format'
 import {useStateValue} from '../StateProvider.js'
 import {setAlert} from './Alert.js'
@@ -10,7 +10,7 @@ function Subtotal(){
         //Needed to grab just the cost, but the whole object was being added to the basket.
         //  The check is to make sure the price number is grabbed.
         var total = basket?.reduce((amount, item) => (amount.total || amount) + item.total)
-        return total.price || total
+        return total.total || total
     }
     const [{basket}, dispatch] = useStateValue();
 
@@ -28,7 +28,6 @@ function Subtotal(){
                         <span>Total ({basket.length} items): </span>
                         <span><b>{value}</b></span>
                     </div>
-
                 )}
                 decimalScale={2}
                 value={getCartTotal(basket)}

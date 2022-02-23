@@ -6,7 +6,6 @@ import ProductService from "../utilities/product-service.js"
 
 function Home(){
     return(
-
         <div className="home main">
             <Carousel fade controls={false} id="home-carousel" className="d-block m-3">
                 <Carousel.Item>
@@ -57,9 +56,6 @@ function Home(){
                     />
                     <Product
                         sku={10177818}
-                    />
-                    <Product
-                        sku={17400959}
                     />
                 </div>
             </div>

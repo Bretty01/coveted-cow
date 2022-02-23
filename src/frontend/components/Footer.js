@@ -23,10 +23,10 @@ function Footer(){
                 <div className="footer-socials">
                     <h3>Socials</h3>
                     <div className="footer-content">
-                        <div><Facebook /><span>Facebook</span></div>
-                        <div><Instagram /><span>Instagram</span></div>
-                        <div><Twitter /><span>Twitter</span></div>
-                        <div><Youtube /><span>Youtube</span></div>
+                        <a><Facebook /><span>Facebook</span></a>
+                        <a><Instagram /><span>Instagram</span></a>
+                        <a><Twitter /><span>Twitter</span></a>
+                        <a><Youtube /><span>Youtube</span></a>
                     </div>
                 </div>
             </div>

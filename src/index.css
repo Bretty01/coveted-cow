@@ -30,6 +30,12 @@ code {
   padding: 0.5rem 0;
 }
 
+.button-generic:active{
+  color: var(--primary-colour);
+  border-color: var(--secondary-colour);
+  background-color: var(--accent-colour);
+}
+
 .button-secondary {
   color: var(--primary-colour) !important;
   font-weight: 900;
@@ -40,4 +46,8 @@ code {
 .main {
   min-height: calc(100vh - var(--header-height) - 240px);
   margin-top: var(--header-height);
+}
+
+.row {
+  margin-right: 0 !important;
 }

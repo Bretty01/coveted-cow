@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import '../css/Login.css'
 import { Link, useHistory} from 'react-router-dom'
 import { auth } from '../Firebase.js'
+import Logo from '../images/svg/Logo.js'
 function Login(){
 
     const history = useHistory();
@@ -28,20 +29,21 @@ function Login(){
 
     return(
         <div className="login">
-            <Link>
-                <img className="login_logo" src="https://image.flaticon.com/icons/png/512/2636/2636252.png" alt="logo" />
+            <Link to="/">
+                <Logo />
             </Link>
-            <div className="login_container">
+            <div className="login-container">
                 <h1>Sign In</h1>
                 <form>
                     <h5>E-mail</h5>
                     <input value={email} onChange={event => setEmail(event.target.value)} type="email" />
                     <h5>Password</h5>
                     <input value={password} onChange={event => setPassword(event.target.value)} type="password" />
-                    <button onClick={loginuser} type="submit" className="login_signInBtn">Sign In</button>
+                    <button onClick={loginuser} type="submit"
+                             className="button-login button-generic">Sign In</button>
                 </form>
-                <p>By signing in, you agree to the Terms and Conditions</p>
-                <button onClick={signUpUser} className="login_registerBtn">Create an Account</button>
+
+                <button onClick={signUpUser} className="button-register button-generic">Create an Account</button>
             </div>
         </div>
     )

@@ -11,6 +11,7 @@ import Alert from './Alert.js'
 function Header() {
     const [inputText, setInputText] = useState("")
     const [menuSwitch, setMenuSwitch] = useState(-1)
+    const [searchSwitch, setSearchSwitch] = useState(true)
     const [{basket, loggedinuser}, dispatch] = useStateValue();
     const logoutUser = () => {
         if(loggedinuser){
@@ -22,7 +23,12 @@ function Header() {
     }, [menuSwitch])
 
     const handleInput = (event) => {
-        setInputText(document.getElementsByClassName("header_searchInput")[0].value)
+        if(window.screen.width >= 768) {
+            setInputText(document.getElementsByClassName("header-searchInput")[0].value)
+        }
+        else {
+            setInputText(document.getElementsByClassName("header-searchInput")[1].value)
+        }
     }
 
     const changeMenuState = () => {
@@ -45,6 +51,13 @@ function Header() {
 
     }
 
+    const toggleSearchBar = () => {
+        const search = document.getElementById("mobile-searchbar")
+        setSearchSwitch(!searchSwitch)
+        searchSwitch ? (search.className = "visible") : (search.className = "")
+
+    }
+
     return(
         <div>
             <div>
@@ -64,7 +77,7 @@ function Header() {
                         </Link>
                     </div>
                     <div id="header-right">
-                        <Search className="header-searchIcon"/>
+                        <Search className="header-searchIcon" onClick={toggleSearchBar}/>
                         <Link to="/checkout" className="header-checkout">
                             <ShoppingBasket/>
                             <span className="header-productCount">{basket?.length}</span>
@@ -79,7 +92,7 @@ function Header() {
                             <img src="https://fontmeme.com/permalink/220219/4690785ad27bbbaacf4dcf2e65c29223.png" />
                         </Link>
                         <div id="header-middle">
-                            <input type="text" className="header_searchInput" onChange={handleInput}/>
+                            <input type="text" className="header-searchInput" onChange={handleInput}/>
                             <Link to={{
                                 pathname: "/catalog",
                                 state:{search: inputText}
@@ -102,6 +115,15 @@ function Header() {
                     </div>
                     <Navlinks />
                 </div>
+            </div>
+            <div id="mobile-searchbar">
+                <input type="text" className="header-searchInput" onChange={handleInput}/>
+                <Link to={{
+                    pathname: "/catalog",
+                    state:{search: inputText}
+                }} onClick={toggleSearchBar}>
+                    <Search className="header-searchIcon"/>
+                </Link>
             </div>
             <div id="mobile-menu" onfocusout={changeMenuState}>
                 <Link to="/">

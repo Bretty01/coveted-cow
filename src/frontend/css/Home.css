@@ -39,12 +39,15 @@ h1{
 
 @media (max-width: 767.98px) {
     .home{
-        margin-top: var(--header-height);
+        margin-top: calc(var(--header-height) + 20px);
     }
 }
 
 @media (min-width: 768px) {
     .home{
         margin-top: calc(var(--header-height) * 2);
+    }
+    .home-row product{
+        width: 50%;
     }
 }

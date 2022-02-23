@@ -10,6 +10,17 @@
     padding-bottom: 1rem;
 }
 
+.footer-block a{
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.footer-block a:hover > *, .footer-block a:hover{
+    border-color: var(--accent-colour);
+    color: var(--accent-colour);
+    fill: var(--accent-colour);
+}
+
 .footer-block h3{
     text-align: center;
     height: 15%;
@@ -23,7 +34,7 @@
     margin: auto;
 }
 
-.footer-content > div {
+.footer-content > div, .footer-content > a {
     display: inline-flex;
     flex-direction: row;
     align-items: center;
