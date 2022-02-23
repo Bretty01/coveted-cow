@@ -103,8 +103,16 @@ function Catalog() {
     }
 
     const setPriceFilter = (event) => {
-        const lowVal = parseFloat(document.getElementById("price-low").value)
-        const highVal = parseFloat(document.getElementById("price-high").value)
+        var lowVal
+        var highVal
+        if(window.screen.width >= 768) {
+            lowVal = parseFloat(document.getElementsByClassName("price-low")[1].value)
+            highVal = parseFloat(document.getElementsByClassName("price-high")[1].value)
+        }
+        else {
+            lowVal = parseFloat(document.getElementsByClassName("price-low")[0].value)
+            highVal = parseFloat(document.getElementsByClassName("price-high")[0].value)
+        }
         let index = -1
         let currentFilter = filters
         if(lowVal && highVal) {
@@ -172,9 +180,9 @@ function Catalog() {
                     <div className="filter-price">
                         <h4>Price</h4>
                         <div>
-                            <input type="number" id="price-low"/>
+                            <input type="number" className="price-low"/>
                             <span>to</span>
-                            <input type="number" id="price-high"/>
+                            <input type="number" className="price-high"/>
                         </div>
                         <button className="button-secondary" onClick={(e) => setPriceFilter(e)}>Update</button>
                     </div>
@@ -204,9 +212,9 @@ function Catalog() {
                     <div className="filter-price">
                         <h4>Price</h4>
                         <div>
-                            <input type="number" id="price-low"/>
+                            <input type="number" className="price-low"/>
                             <span>to</span>
-                            <input type="number" id="price-high"/>
+                            <input type="number" className="price-high"/>
                         </div>
                         <button className="button-secondary" onClick={(e) => setPriceFilter(e)}>Update</button>
                     </div>
