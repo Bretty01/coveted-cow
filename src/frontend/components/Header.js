@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {Search, ShoppingBasket, Menu} from "@material-ui/icons"
+import {Search, ShoppingBasket, Menu} from "@mui/icons-material"
 import { Link } from 'react-router-dom'
 import { useStateValue } from '../StateProvider.js'
 import Navlinks from './Navlinks.js'

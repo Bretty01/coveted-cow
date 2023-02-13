@@ -56,6 +56,13 @@ export default class ProductInfoDao {
                             })
                         }
                         query.$and.push(or)
+                        /**
+                         * Example full string:
+                         * {"$and":[{"$or":[{"product_description.brand":{"$eq":"Aurora"}},
+                         * {"product_description.brand":{"$eq":"Exceptional Home"}}]},
+                         * {"$or":[{"price":{"$gte":10,"$lte":100}}]}]}
+                         */
+
                     }
                 }
                 else {

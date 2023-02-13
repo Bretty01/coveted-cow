@@ -1,6 +1,6 @@
 import './App.css';
 import Header from './components/Header.js';
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Login from './components/Login.js'
 import Home from './components/Home.js'
 import ProductPage from './components/ProductPage.js'
@@ -40,7 +40,7 @@ function App() {
   return (
       <Router>
         <div className="App">
-            <Switch>
+            <Routes>
                 <Route path="/product/:id" render={(props) => (
                     <div>
                         <Header/>
@@ -67,7 +67,7 @@ function App() {
                     <Home/>
                     <Footer/>
                 </Route>
-            </Switch>
+            </Routes>
         </div>
       </Router>
   );
