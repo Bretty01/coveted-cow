@@ -41,32 +41,40 @@ function App() {
       <Router>
         <div className="App">
             <Routes>
-                <Route path="/product/:id" render={(props) => (
+                <Route path="/product/:productId" element={
                     <div>
                         <Header/>
-                        <ProductPage {...props} />
+                        <ProductPage />
                         <Footer/>
                     </div>
-                )} />
-                <Route path="/catalog">
-                    <Header/>
-                    <Catalog/>
-                    <Footer/>
-                </Route>
-                <Route path="/checkout">
-                    <Header/>
-                    <Checkout/>
-                    <Footer/>
-                </Route>
-                <Route path="/login">
-                    <Login/>
-                    <Footer/>
-                </Route>
-                <Route path="/">
-                    <Header/>
-                    <Home/>
-                    <Footer/>
-                </Route>
+                } />
+                <Route path="/catalog" element={
+                    <div>
+                        <Header/>
+                        <Catalog/>
+                        <Footer/>
+                    </div>
+                } />
+                <Route path="/checkout" element={
+                    <div>
+                        <Header/>
+                        <Checkout/>
+                        <Footer/>
+                    </div>
+                } />
+                <Route path="/login" element={
+                    <div>
+                        <Login/>
+                        <Footer/>
+                    </div>
+                }/>
+                <Route path="/" element={
+                    <div>
+                        <Header/>
+                        <Home/>
+                        <Footer/>
+                    </div>
+                }/>
             </Routes>
         </div>
       </Router>

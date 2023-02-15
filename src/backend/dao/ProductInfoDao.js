@@ -25,7 +25,6 @@ export default class ProductInfoDao {
         let sortOrder
         let sortType
 
-
         if(filters || search) {
             query = {"$and": []}
             if(search) {

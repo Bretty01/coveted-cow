@@ -31,7 +31,7 @@ function ProductCard(props){
         }
     };
     return (
-        <Link to={location => products.length > 0 && `/product/${products[0]._id}`}
+        <Link to={"/product/" + products[0]?._id}
               className="product col-12 col-md-4 col-lg-3">
             <img src={products[0]?.image || "https://c.tenor.com/I6kN-6X7nhAAAAAi/loading-buffering.gif"}
                  alt="Product Image" />

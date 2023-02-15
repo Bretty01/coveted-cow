@@ -3,7 +3,9 @@ import ProductService from  "../utilities/product-service"
 import "../css/ProductPage.css"
 import { useStateValue } from '../StateProvider.js'
 import Alert, {setAlert} from "./Alert.js"
-const ProductPage = props => {
+import { useParams } from "react-router-dom"
+const ProductPage = () => {
+    let {productId} = useParams()
     const initialState = {
         id: null,
         name: "",
@@ -16,8 +18,8 @@ const ProductPage = props => {
     const[{basket}, dispatch] = useStateValue()
 
     useEffect(() => {
-        getProduct(props.match.params.id)
-    }, [props.match.params.id])
+        getProduct(productId)
+    }, [productId])
 
     useEffect(() => {
         var tabs = document.getElementsByClassName("tablinks")
@@ -27,7 +29,6 @@ const ProductPage = props => {
     }, [isRendered])
 
     const getProduct = (id) => {
-        console.log(product)
         ProductService.getById(id)
             .then(res => {
                 setProduct(res.data)

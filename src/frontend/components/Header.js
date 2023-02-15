@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {Search, ShoppingBasket, Menu} from "@mui/icons-material"
-import { Link } from 'react-router-dom'
+import { Link , useNavigate} from 'react-router-dom'
 import { useStateValue } from '../StateProvider.js'
 import Navlinks from './Navlinks.js'
 import '../css/Header.css'
@@ -9,13 +9,21 @@ import {auth} from '../Firebase.js'
 import {Container} from 'react-bootstrap'
 import Alert from './Alert.js'
 function Header() {
+    let navigate = useNavigate()
     const [inputText, setInputText] = useState("")
     const [menuSwitch, setMenuSwitch] = useState(-1)
     const [searchSwitch, setSearchSwitch] = useState(true)
     const [{basket, loggedinuser}, dispatch] = useStateValue();
     const logoutUser = () => {
         if(loggedinuser){
-            auth.signOut();
+            dispatch({
+                type: 'SET_LOGIN',
+                user: null
+            })
+            navigate("/")
+        } else {
+            console.log("I am here")
+            navigate("/login")
         }
     }
     useEffect(() => {
@@ -101,12 +109,12 @@ function Header() {
                             </Link>
                         </div>
                         <div id="header-right">
-                            <Link to={!loggedinuser && "/login"} className="header-login">
+                            <div className="header-login">
                                 <div onClick={logoutUser} className="header_option">
                                     <span>Hello, {loggedinuser?.email}</span>
                                     <span>{loggedinuser ? 'Sign Out' : 'Sign In'}</span>
                                 </div>
-                            </Link>
+                            </div>
                             <Link to="/checkout" className="header-checkout">
                                 <ShoppingBasket/>
                                 <span className="header-productCount">{basket?.length}</span>
