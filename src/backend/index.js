@@ -2,8 +2,8 @@ import app from "./server.js"
 import mongodb from "mongodb"
 import ProductInfoDAO from "./dao/ProductInfoDao.js"
 import UserDao from "./dao/UserDao.js"
-const MongoClient = mongodb.MongoClient
 import * as dotenv from 'dotenv'
+const MongoClient = mongodb.MongoClient
 dotenv.config()
 const port = 5000 || 8000
 MongoClient.connect(

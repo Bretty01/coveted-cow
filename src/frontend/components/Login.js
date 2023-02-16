@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import '../css/Login.css'
 import { Link, useNavigate} from 'react-router-dom'
-import { auth } from '../Firebase.js'
 import UserService from "../utilities/UserService";
 import Logo from '../images/svg/Logo.js'
 import {useStateValue} from "../StateProvider";
@@ -22,9 +21,14 @@ function Login(){
                     type: 'SET_LOGIN',
                     user: res.data
                 })
-                navigate('/')
+                UserService.setCookie(res.data).then((r) => {
+                    console.log(r)
+                    navigate('/')
+                }).catch(err => {
+                    console.error(err)
+                    setError("Unable to login: " + err.response.data.message)
+                })
             }
-            console.log(res)
             setError(null)
         })
             .catch(err => {
@@ -37,15 +41,6 @@ function Login(){
                 history.push('/')
             })
             .catch(e => alert(e.message))*/
-    }
-
-    const signUpUser = event => {
-        event.preventDefault()
-        auth.createUserWithEmailAndPassword(email, password)
-            .then(auth => {
-                navigate('/');
-            })
-            .catch(e => alert(e.message))
     }
 
     return(
@@ -64,8 +59,8 @@ function Login(){
                     <button onClick={loginuser} type="submit"
                              className="button-login button-generic">Sign In</button>
                 </form>
-
-                <button onClick={signUpUser} className="button-register button-generic">Create an Account</button>
+                <Link className="button-login button-generic" to="/signup" className="button-register button-generic">
+                    Create an Account</Link>
                 {errorMessage && (
                     <div className="login-message">
                         <span>{errorMessage}</span>

@@ -1,3 +1,7 @@
 {
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "@types/cookie-parser": "^1.4.3",
+    "cookie-parser": "^1.4.6"
+  }
 }

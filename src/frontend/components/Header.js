@@ -5,24 +5,23 @@ import { useStateValue } from '../StateProvider.js'
 import Navlinks from './Navlinks.js'
 import '../css/Header.css'
 import Logo from '../images/svg/Logo'
-import {auth} from '../Firebase.js'
-import {Container} from 'react-bootstrap'
 import Alert from './Alert.js'
+import UserService from "../utilities/UserService"
 function Header() {
     let navigate = useNavigate()
     const [inputText, setInputText] = useState("")
     const [menuSwitch, setMenuSwitch] = useState(-1)
     const [searchSwitch, setSearchSwitch] = useState(true)
     const [{basket, loggedinuser}, dispatch] = useStateValue();
-    const logoutUser = () => {
+    const logoutUser = async () => {
         if(loggedinuser){
             dispatch({
                 type: 'SET_LOGIN',
                 user: null
             })
+            UserService.deleteCookie().catch(err => console.error("Unable to delete cookie: " + err))
             navigate("/")
         } else {
-            console.log("I am here")
             navigate("/login")
         }
     }

@@ -6,23 +6,29 @@ import Home from './components/Home.js'
 import ProductPage from './components/ProductPage.js'
 import Checkout from './components/Checkout.js'
 import Footer from './components/Footer.js'
-import Navlinks from './components/Navlinks.js'
+import Signup from './components/Signup'
 import Catalog from './components/Catalog.js'
-import Alert from './components/Alert.js'
 import {auth} from './Firebase.js'
 import {useEffect} from 'react'
 import {useStateValue} from './StateProvider.js'
+import UserService from "./utilities/UserService";
 
 
 
 function App() {
   const [{loggedinuser}, dispatch] = useStateValue()
-  useEffect(() => {
-      const unsubscribe = auth.onAuthStateChanged((userauth) => {
-          if(userauth){
+  useEffect( () => {
+      const getCookie = async () => {
+          const cookieInfo = await UserService.getCookie()
+          return cookieInfo
+
+      }
+      getCookie().then(res => {
+          console.log(res)
+          if(res.data.login){
               dispatch({
                   type: 'SET_LOGIN',
-                  user: userauth
+                  user: res.data.login
               })
           } else{
               dispatch({
@@ -31,10 +37,8 @@ function App() {
               })
           }
       })
-      return () => {
-          unsubscribe();
-      }
   }, [])
+
 
 
   return (
@@ -72,6 +76,12 @@ function App() {
                     <div>
                         <Header/>
                         <Home/>
+                        <Footer/>
+                    </div>
+                }/>
+                <Route path="/signup" element={
+                    <div>
+                        <Signup/>
                         <Footer/>
                     </div>
                 }/>
