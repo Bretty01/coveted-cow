@@ -1,5 +1,6 @@
 import mongodb from "mongodb"
 import * as dotenv from 'dotenv'
+import bcrypt from "bcrypt"
 dotenv.config()
 const ObjectId = mongodb.ObjectId
 let userInfo
@@ -16,11 +17,14 @@ export default class UserDao {
         }
     }
     static async getUser({email = null, password = null}){
+        const SALT_ROUNDS = 10
         if(!email || !password) return {"userInfo": null, status: 400, message: "Please enter email and password."}
         let cursor
         try {
-            cursor = await userInfo.findOne({"$and": [{"email": email}, {"password": password}]})
-            if(cursor?._deleted || !cursor){
+            cursor = await userInfo.findOne({"email": email})
+            const correctPassword = await bcrypt.compare(password, cursor?.password)
+            console.log(correctPassword)
+            if(cursor?._deleted || !cursor || !correctPassword){
                 return {status: 401, message: "Invalid Credentials"}
             }
         } catch (err) {
@@ -30,13 +34,16 @@ export default class UserDao {
     }
 
     static async createUser({email = null, password = null, name = null}) {
+        const SALT_ROUNDS = 10
         if(!email || !password || !name) return {"userInfo": null, status: 400, message: "Please enter all information."}
         let cursor
         try {
+            const hashPassword = await bcrypt.hash(password, SALT_ROUNDS)
+            console.log(hashPassword)
             cursor = await userInfo.insertOne({
                 "name": name,
                 "email": email,
-                "password": password,
+                "password": hashPassword,
                 _deleted: false
             })
         } catch (e) {

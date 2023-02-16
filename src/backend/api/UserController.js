@@ -1,5 +1,4 @@
 import UserDao from "../dao/UserDao.js"
-
 export default class UserController {
     static async getUser(req, res) {
         const {userInfo = null , status = null, message = null} =
@@ -8,9 +7,8 @@ export default class UserController {
         res.status(200).json({"userInfo": userInfo, "status": status, "message": message})
     }
     static async createUser(req, res) {
-        const {status = null, message = null} =
-            await UserDao.createUser({email: req.body.email, password: req.body.password,
-                name: req.body.name})
+        const {status = null, message = null} = await UserDao.createUser(
+            {email: req.body.email, password: req.body.password, name: req.body.name})
         res.status(status).json({"message": message})
     }
     static setCookie(req, res) {
