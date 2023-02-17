@@ -1,24 +1,24 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Logo from "../images/svg/Logo";
 import React, {useState} from "react";
 import UserService from "../utilities/UserService";
 
 const Signup = () => {
     const [errorMessage, setError] = useState(null)
+    const navigate = useNavigate();
     const signUpUser = (e) => {
-        console.log(e)
         const user = e.target[0].value
         const email = e.target[1].value
         const newPassword = e.target[2].value
         const reEnterPassword = e.target[3].value
         e.preventDefault()
         if(!email || !newPassword || !reEnterPassword) return setError("Please fill out all fields.")
-        if(newPassword != reEnterPassword) return setError("Passwords do not match.")
+        if(newPassword !== reEnterPassword) return setError("Passwords do not match.")
         UserService.signupUser(email, newPassword, user).then(res => {
             setError(null)
+            navigate("/")
         }).catch(err => {
-            console.log(err)
-            //setError(err.response.data.message)
+            setError(err.response.data.message)
         })
     }
 

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import '../css/Login.css'
 import { Link, useNavigate} from 'react-router-dom'
 import UserService from "../utilities/UserService";
@@ -19,7 +19,7 @@ function Login(){
             if(res.status === 200) {
                 dispatch({
                     type: 'SET_LOGIN',
-                    user: res.data
+                    user: res.data?.userInfo
                 })
                 UserService.setCookie(res.data).then((r) => {
                     console.log(r)
@@ -58,9 +58,9 @@ function Login(){
                            aria-required={true}/>
                     <button onClick={loginuser} type="submit"
                              className="button-login button-generic">Sign In</button>
+                    <button className="button-register button-generic" onClick={() => navigate("/signup")}>
+                        Create an Account</button>
                 </form>
-                <Link className="button-login button-generic" to="/signup" className="button-register button-generic">
-                    Create an Account</Link>
                 {errorMessage && (
                     <div className="login-message">
                         <span>{errorMessage}</span>

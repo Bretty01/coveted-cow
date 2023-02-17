@@ -6,7 +6,7 @@ function Navlinks(){
         <div className="nav-links">
             <Link to="/catalog" className="button-secondary">Products</Link>
             <Link className="button-secondary">About</Link>
-            <Link className="button-secondary">Account</Link>
+            <Link to="/account" className="button-secondary">Account</Link>
             <Link className="button-secondary">Locations</Link>
         </div>
     )

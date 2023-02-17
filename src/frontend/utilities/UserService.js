@@ -14,6 +14,13 @@ class UserService {
             "name": user
         })
     }
+
+    async deleteUser(id){
+        return await http.post("/user/delete", {
+            "id": id
+        })
+    }
+
     async setCookie(userInfo){
         return await http.post("/user/setcookie", {
             "logininfo": userInfo
@@ -25,6 +32,14 @@ class UserService {
 
     async deleteCookie() {
         return await http.get("/user/deletecookie")
+    }
+
+    async updatePassword(id, oldPassword, newPassword) {
+        return await http.post("/user/updatepassword", {
+            "id": id,
+            "oldPassword": oldPassword,
+            "newPassword": newPassword
+        })
     }
 }
 

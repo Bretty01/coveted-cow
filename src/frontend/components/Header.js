@@ -25,6 +25,7 @@ function Header() {
             navigate("/login")
         }
     }
+
     useEffect(() => {
         menuAnimation()
     }, [menuSwitch])
@@ -110,7 +111,7 @@ function Header() {
                         <div id="header-right">
                             <div className="header-login">
                                 <div onClick={logoutUser} className="header_option">
-                                    <span>Hello, {loggedinuser?.email}</span>
+                                    <span>Hello, {loggedinuser?.name}</span>
                                     <span>{loggedinuser ? 'Sign Out' : 'Sign In'}</span>
                                 </div>
                             </div>

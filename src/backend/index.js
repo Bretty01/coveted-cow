@@ -5,7 +5,7 @@ import UserDao from "./dao/UserDao.js"
 import * as dotenv from 'dotenv'
 const MongoClient = mongodb.MongoClient
 dotenv.config()
-const port = 5000 || 8000
+const port = process.env.PORT || 8000
 MongoClient.connect(
     "mongodb+srv://Bretty0:" + process.env.MONGODB_PASS + "@cluster0.z9hba.mongodb.net/website?retryWrites=true&w=majority",
     {

@@ -8,7 +8,7 @@ import Checkout from './components/Checkout.js'
 import Footer from './components/Footer.js'
 import Signup from './components/Signup'
 import Catalog from './components/Catalog.js'
-import {auth} from './Firebase.js'
+import Account from './components/Account.js'
 import {useEffect} from 'react'
 import {useStateValue} from './StateProvider.js'
 import UserService from "./utilities/UserService";
@@ -24,11 +24,10 @@ function App() {
 
       }
       getCookie().then(res => {
-          console.log(res)
           if(res.data.login){
               dispatch({
                   type: 'SET_LOGIN',
-                  user: res.data.login
+                  user: res.data.login?.userInfo
               })
           } else{
               dispatch({
@@ -36,6 +35,8 @@ function App() {
                   user: null
               })
           }
+      }).catch(err => {
+          console.error(err)
       })
   }, [])
 
@@ -85,6 +86,13 @@ function App() {
                         <Footer/>
                     </div>
                 }/>
+                <Route path="/account" element={
+                    <div>
+                        <Header />
+                        <Account />
+                        <Footer />
+                    </div>
+                } />
             </Routes>
         </div>
       </Router>
