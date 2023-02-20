@@ -4,6 +4,9 @@ import "../css/ProductPage.css"
 import { useStateValue } from '../StateProvider.js'
 import Alert, {setAlert} from "./Alert.js"
 import { useParams } from "react-router-dom"
+import StarIcon from '@mui/icons-material/Star';
+import StarHalfIcon from '@mui/icons-material/StarHalf';
+import StarOutlineIcon from '@mui/icons-material/StarOutline';
 const ProductPage = () => {
     let {productId} = useParams()
     const initialState = {
@@ -13,9 +16,32 @@ const ProductPage = () => {
         image: "",
         product_description: []
     }
+    const [reviewScore, setReviewScore] = useState([<StarOutlineIcon />, <StarOutlineIcon />, <StarOutlineIcon />,
+        <StarOutlineIcon />, <StarOutlineIcon />, ])
     const [product, setProduct] = useState(initialState)
     const [isRendered, setRenderState] = useState(false)
     const[{basket}, dispatch] = useStateValue()
+
+    useEffect(() => {
+        let reviewStars = []
+        if(product.reviewCount > 0) {
+            const initialStars = Math.floor(product.reviewScore)
+            const partialStar = product.reviewScore % initialStars > 0.4
+            for(let i = 0; i < initialStars; i++) {
+                reviewStars[i] = <StarIcon />
+            }
+            if(product.reviewScore != 5) {
+                reviewStars[initialStars] = partialStar ? <StarHalfIcon /> : <StarOutlineIcon />
+                if(initialStars < 4) {
+                    for(let i = initialStars + 1; i <= 4; i++) {
+                        reviewStars[i] = <StarOutlineIcon />
+                    }
+                }
+            }
+            console.log(reviewStars)
+            setReviewScore(reviewStars)
+        }
+    }, [product])
 
     useEffect(() => {
         getProduct(productId)
@@ -40,15 +66,13 @@ const ProductPage = () => {
     }
 
     const addToBasket = () => {
-        console.log(basket)
         const quantity = parseInt(document.getElementById("input-quantity").value)
-        if(quantity === "" || quantity === 0 || !quantity) {
+        if(quantity === "" || quantity <= 0 || !quantity) {
             setAlert("error", "Please enter a valid quantity.")
             return
         }
         for(var item in basket) {
             if(basket[item].id === product._id) {
-                console.log("I am here.")
                 setAlert("notice", "You may not have more than one of the same item in your shopping cart.")
                 return
             }
@@ -105,7 +129,12 @@ const ProductPage = () => {
                         <div className="product-page-sales">
                             <div className="sales-upper">
                                 <p><strong>${product.price}</strong></p>
-                                <div className="product-page-ratings">*Rating goes here*</div>
+                                <div className="product-page-ratings">
+                                    {reviewScore.map(star => {
+                                        return star
+                                    })}
+                                    <span>({product?.reviewCount})</span>
+                                </div>
                             </div>
                             <div className="sales-middle">
                                 <p>Expect your product to arrive anywhere from {getFutureDate()}</p>

@@ -1,4 +1,5 @@
 import mongodb from "mongodb"
+import UserDao from "./UserDao.js"
 const ObjectId = mongodb.ObjectId
 let productInfo
 
@@ -97,6 +98,7 @@ export default class ProductInfoDao {
     }
 
     static async getProductByID(id) {
+        let productRes
         try {
             const pipeline = [
                 {
@@ -104,8 +106,8 @@ export default class ProductInfoDao {
                 },
                 //TODO: When reviews are added to the database, add code to retrieve the reviews to the database
             ]
-
-            return productInfo.aggregate(pipeline).next()
+            productRes = await productInfo.aggregate(pipeline).next()
+            return await this.appendReviewAggregate(productRes)
         } catch(err) {
             console.error(`Unable to retrieve product information: ${err}`)
             throw err
@@ -121,5 +123,24 @@ export default class ProductInfoDao {
             console.log(`Unable to perform query, ${err}`)
             return { brandList: [] }
         }
+    }
+
+    static async appendReviewAggregate(queryRes) {
+        let totalScore = 0
+        if(!queryRes.reviews || queryRes.reviews.length <= 0) {
+            queryRes.reviewCount = 0
+            queryRes.reviewScore = totalScore
+            return queryRes
+        }
+        queryRes.reviewCount = queryRes.reviews.length
+        for(let i = 0; i < queryRes.reviews.length; i++){
+            totalScore = totalScore + queryRes.reviews[i].rating
+            queryRes.reviews[i].user = await UserDao.getUserById(queryRes.reviews[i].user)
+            delete queryRes.reviews[i].user.password
+            delete queryRes.reviews[i].user._deleted
+            delete queryRes.reviews[i].user._id
+        }
+        queryRes.reviewScore = (Math.round((totalScore / queryRes.reviews.length) * 10) / 10)
+        return queryRes
     }
 }

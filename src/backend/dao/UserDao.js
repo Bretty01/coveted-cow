@@ -87,4 +87,7 @@ export default class UserDao {
         return statusCode
     }
 
+    static async getUserById(id) {
+        return await userInfo.findOne({"_id": new ObjectId(id)})
+    }
 }
