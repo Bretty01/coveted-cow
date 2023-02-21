@@ -1,12 +1,18 @@
 import {useState} from "react"
 import {useStateValue} from "../StateProvider"
 import "../css/Reviews.css"
+import ProductService from "../utilities/product-service"
 const Reviews = (props) => {
     const[{loggedinuser}, dispatch] = useStateValue()
     const [ratingNumber, setRating] = useState(5)
+    const [buttonDisabled, setDisable] = useState(false)
     const handleReview = (e) => {
         e.preventDefault()
-        console.log(e)
+        ProductService.submitReview(props.productId, e.target[0].value, parseInt(e.target[1].value), e.target[2].value,
+          loggedinuser._id).then(res => {
+            console.log("Review submitted")
+            setDisable(true)
+        }).catch(err => console.error(err))
     }
     return (
         <div>
@@ -29,7 +35,7 @@ const Reviews = (props) => {
                                 <label htmlFor="review-description">Review</label>
                                 <textarea id="review-description" rows="4" />
                             </div>
-                            <input className="button-generic" type="submit" />
+                            <input className="button-generic" type="submit" disabled={buttonDisabled}/>
                         </form>
                     ) : (<span>To write a review, you will need to log in.
                         Click <a href="/login">here</a> to log in or click <a href="/signup">here</a> to signup.</span>)}

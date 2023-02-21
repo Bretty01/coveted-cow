@@ -125,6 +125,38 @@ export default class ProductInfoDao {
         }
     }
 
+    static async appendNewReview(productId, reviewTitle, reviewScore, reviewDescription, userId) {
+        let updateRes
+        console.log({
+            "productId": productId,
+            "reviewTitle": reviewTitle,
+            date: Date.now(),
+            "reviewScore": reviewScore,
+            "reviewDescription": reviewDescription,
+            "userId": userId
+        })
+        try {
+            updateRes = await productInfo.updateOne({_id: new ObjectId(productId)},
+                {
+                    $push: {
+                        reviews:{
+                            rating: reviewScore,
+                            date: Date.now(),
+                            title: reviewTitle,
+                            description: reviewDescription,
+                            user: new ObjectId(userId)
+                        }
+                    }
+                })
+        } catch(e) {
+            console.error(e)
+            return {status: 500, message: "Something went wrong submitting review: " + e}
+        }
+        console.log(updateRes)
+        return updateRes.modifiedCount === 1 ?  {status: 200, message: "Review successfully submitted."} :
+             {status: 500, message: "Something went wrong upon submitting review."}
+    }
+
     static async appendReviewAggregate(queryRes) {
         let totalScore = 0
         if(!queryRes.reviews || queryRes.reviews.length <= 0) {

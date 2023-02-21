@@ -72,4 +72,12 @@ export default class ProductController {
             res.status(500).json({ error: err })
         }
     }
+
+    static async submitReview(req, res) {
+        if(!req.body.reviewTitle || !req.body.reviewScore || !req.body.reviewDescription)
+            return res.status(400).json({message: "Please enter all required information."})
+        const {status, message} = await ProductInfoDAO.appendNewReview(req.body.productId, req.body.reviewTitle,
+            req.body.reviewScore, req.body.reviewDescription, req.body.userId)
+        res.status(status).json({"message": message})
+    }
 }

@@ -17,5 +17,15 @@ class ProductService {
     find(query, by = "name", page = 0) {
         return http.get(`?${by}=${query}&page=${page}`)
     }
+
+    submitReview(productId, reviewTitle, reviewScore, reviewDescription, userId) {
+        return http.post("/submitreview", {
+            "productId": productId,
+            "reviewTitle": reviewTitle,
+            "reviewScore": reviewScore,
+            "reviewDescription": reviewDescription,
+            "userId": userId
+        })
+    }
 }
 export default new ProductService()

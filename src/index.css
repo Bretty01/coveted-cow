@@ -28,12 +28,21 @@ code {
   font-weight: bold;
   border-color: var(--accent-colour);
   padding: 0.5rem 0;
+  cursor: pointer;
 }
 
 .button-generic:active{
   color: var(--primary-colour);
   border-color: var(--secondary-colour);
   background-color: var(--accent-colour);
+}
+
+.button-generic:disabled{
+  border-color: lightgray;
+  color: lightgray;
+  border-width: 1px;
+  font-weight: normal;
+  cursor: default;
 }
 
 .button-secondary {

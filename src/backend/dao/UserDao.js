@@ -80,7 +80,6 @@ export default class UserDao {
             const hashPassword = await bcrypt.hash(newPassword, SALT_ROUNDS)
             const updateRes = await userInfo.updateOne({_id: new ObjectId(id)},
                 {$set: {password: hashPassword}})
-            console.log(updateRes)
             updateRes.modifiedCount === 1 ? statusCode = {status: 200, message: "Password successfully updated."} :
                 statusCode = {status: 500, message: "Something went wrong upon updating password."}
 

@@ -120,7 +120,8 @@ const ProductPage = () => {
         var fiveDays = new Date().setDate(date.getDate() + 5)
         tomorrow = new Date(tomorrow)
         fiveDays = new Date(fiveDays)
-        return tomorrow.toDateString() + " to " + fiveDays.toDateString()
+        return new Intl.DateTimeFormat("en-US").format(tomorrow) + " to " +
+            new Intl.DateTimeFormat("en-US").format(fiveDays)
     }
 
     return(
@@ -145,7 +146,6 @@ const ProductPage = () => {
                                 <p>Expect your product to arrive anywhere from {getFutureDate()}</p>
                             </div>
                             <div className="product-page-checkout sales-bottom">
-                                <span className="remaining-quantity">23 remaining units</span>
                                 <div>
                                     <input type="number" id="input-quantity" className="button-generic"
                                            min="0" max="50"/>
@@ -201,7 +201,7 @@ const ProductPage = () => {
                             </div>
                             <div id="reviews" className="content">
                                 <Reviews reviewScore={product.reviewScore} reviewCount={product.reviewCount}
-                                reviews={product.reviews} />
+                                reviews={product.reviews} productId={productId}/>
                             </div>
                         </div>
                     </div>
