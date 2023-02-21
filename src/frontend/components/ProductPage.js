@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import ProductService from  "../utilities/product-service"
+import Reviews from "./Reviews"
 import "../css/ProductPage.css"
 import { useStateValue } from '../StateProvider.js'
 import Alert, {setAlert} from "./Alert.js"
@@ -21,6 +22,11 @@ const ProductPage = () => {
     const [product, setProduct] = useState(initialState)
     const [isRendered, setRenderState] = useState(false)
     const[{basket}, dispatch] = useStateValue()
+    const descriptionTabs = [
+        useRef(null),
+        useRef(null),
+        useRef(null)
+    ]
 
     useEffect(() => {
         let reviewStars = []
@@ -48,9 +54,8 @@ const ProductPage = () => {
     }, [productId])
 
     useEffect(() => {
-        var tabs = document.getElementsByClassName("tablinks")
-        if(tabs && tabs.length > 0) {
-            tabs[0].click()
+        if(isRendered){
+            descriptionTabs[0].current.click()
         }
     }, [isRendered])
 
@@ -129,11 +134,11 @@ const ProductPage = () => {
                         <div className="product-page-sales">
                             <div className="sales-upper">
                                 <p><strong>${product.price}</strong></p>
-                                <div className="product-page-ratings">
+                                <div className="product-page-ratings" title={product?.reviewScore}>
                                     {reviewScore.map(star => {
                                         return star
                                     })}
-                                    <span>({product?.reviewCount})</span>
+                                    <span><strong>{product.reviewScore}</strong>({product?.reviewCount})</span>
                                 </div>
                             </div>
                             <div className="sales-middle">
@@ -152,9 +157,14 @@ const ProductPage = () => {
                     <div className="product-page-description">{product.product_description.details}</div>
 
                     <div id="product-page-specs">
+
                         <div className="tab">
-                            <button className="tablinks" onClick={(e) => swapTabs(e, "details")}>Details</button>
-                            <button className="tablinks" onClick={(e) => swapTabs(e, "dimensions")}>Dimensions</button>
+                            <button className="tablinks" ref={descriptionTabs[0]}
+                                    onClick={(e) => swapTabs(e, "details")}>Details</button>
+                            <button className="tablinks" ref={descriptionTabs[1]}
+                                    onClick={(e) => swapTabs(e, "dimensions")}>Dimensions</button>
+                            <button className="tablinks" ref={descriptionTabs[2]}
+                                    onClick={(e) => swapTabs(e, "reviews")}>Reviews</button>
                         </div>
                         <div className="specs-details">
                             <div id="details" className="content">
@@ -189,12 +199,16 @@ const ProductPage = () => {
                                     <div className="col-8">{product.product_description.specs.weight} lbs.</div>
                                 </div>
                             </div>
+                            <div id="reviews" className="content">
+                                <Reviews reviewScore={product.reviewScore} reviewCount={product.reviewCount}
+                                reviews={product.reviews} />
+                            </div>
                         </div>
                     </div>
 
                 </div>
             ) : (
-                <div>
+                <div className="main">
                     <p>Product not found</p>
                 </div>
             )}
