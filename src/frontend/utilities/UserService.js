@@ -1,5 +1,10 @@
 import http from "../http-common"
 
+/**
+ * Class: UserService
+ * Purpose: A variety of function helpers that pass on http requests to axios to send to the backend. These
+ * functions are more so catered to handling users and cookies.
+ */
 class UserService {
     async loginUser(email, password) {
         return await http.post("/user/login", {

@@ -15,13 +15,11 @@ function Catalog() {
     const[lastPage, setLastPage] = useState(1)
     const[currentPage, setCurrentPage] = useState(0)
     const[brandFilters, setBrandFilters] = useState([])
-    const[sort, setSort] = useState()
+    const[sort, setSort] = useState("")
     const[filters, setFilters] = useState({"price" : [], "brand" : []})
     const[isExpanded, setExpand] = useState(false);
     useEffect(() => {
-        //retrieveProducts()
         getBrandList()
-        console.log(search)
     }, [])
     useEffect(() => {
         calculatePageNumber()
@@ -32,18 +30,6 @@ function Catalog() {
     useEffect(() => {
         createQuery()
     }, [sort, currentPage])
-
-    const retrieveProducts = () => {
-        setProductList([])
-        ProductService.getQuery()
-            .then(res => {
-                setProductList(res.data.products)
-                setData(res.data)
-            })
-            .catch(err => {
-                console.log(`Unable to load products, ${err}`)
-            });
-    }
 
     const getBrandList = () => {
         ProductService.getBrandList()
@@ -56,6 +42,10 @@ function Catalog() {
 
     }
 
+    /**
+     * Function: calculatePageNumber
+     * Purpose: Displays how many pages there are to the user.
+     */
     const calculatePageNumber = () => {
         const remainderProduct = data.total_results % data.entries_per_page
         const totalPages = parseInt(data.total_results / data.entries_per_page)
@@ -102,9 +92,15 @@ function Catalog() {
         setSort(`${type},${order}`)
     }
 
+    /**
+     * Function: setPriceFilter
+     * Purpose: Get the price number boxes and create a query to send to the backend.
+     * @param event Form event handlers for the price boxes.
+     */
     const setPriceFilter = (event) => {
         var lowVal
         var highVal
+        //Value different between mobile and desktop versions.
         if(window.screen.width >= 768) {
             lowVal = parseFloat(document.getElementsByClassName("price-low")[1].value)
             highVal = parseFloat(document.getElementsByClassName("price-high")[1].value)
@@ -113,8 +109,9 @@ function Catalog() {
             lowVal = parseFloat(document.getElementsByClassName("price-low")[0].value)
             highVal = parseFloat(document.getElementsByClassName("price-high")[0].value)
         }
-        let index = -1
         let currentFilter = filters
+        //Set the price filter only if both number boxes are filled, otherwise the filter is invalid and submit no
+        //  price filter
         if(lowVal && highVal) {
             if(currentFilter["price"]){
                 currentFilter["price"] = []
@@ -229,7 +226,7 @@ function Catalog() {
 
                     </div>
                 </div>
-                <div class="row">
+                <div className="row">
                     {productList?.map(product => {
                         return(
                             <Product

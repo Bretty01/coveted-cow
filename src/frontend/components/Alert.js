@@ -14,6 +14,13 @@ function Alert() {
     )
 }
 
+/**
+ * Function: setAlert
+ * Purpose: sets a popup alert with the notice type and the message wanted.
+ * @param status The class to set for the component. "success" = checkmark/green, "notice" = exclamation mark/yellow
+ *                  "error" = X mark/red
+ * @param message The message to show to the user.
+ */
 export function setAlert(status, message){
     document.getElementById("alert-message").textContent = message
     document.getElementById("alert-box").className = "enable"

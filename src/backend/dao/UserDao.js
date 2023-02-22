@@ -47,7 +47,8 @@ export default class UserDao {
         } catch (e) {
             console.error("Unable to submit information " + e)
         }
-        if(cursor) return {status: 201, message: "User successfully created."}
+        console.log(cursor)
+        if(cursor) return {status: 201, message: "User successfully created.", id: cursor.insertedId}
         else return {status: 500, message: "Something went wrong on user creation."}
     }
 

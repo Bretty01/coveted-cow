@@ -9,9 +9,9 @@ export default class UserController {
     static async createUser(req, res) {
         const accountExists = await UserDao.accountExists(req.body.email)
         if(accountExists) return  res.status(400).json({message: "An account already exists under this email address."})
-        const {status = null, message = null} = await UserDao.createUser(
+        const {status = null, message = null, id = null} = await UserDao.createUser(
             {email: req.body.email, password: req.body.password, name: req.body.name})
-        res.status(status).json({"message": message})
+        res.status(status).json({"message": message, userId: id})
     }
     static async deleteUser(req, res) {
         if(!req.body.id) return res.status(400).json({message: "Please give a user id."})

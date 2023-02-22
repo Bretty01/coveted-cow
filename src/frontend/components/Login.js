@@ -35,12 +35,6 @@ function Login(){
                 console.error(err)
                 setError("Unable to login: " + err.response.data.message)
             })
-        /**
-        auth.signInWithEmailAndPassword(email, password)
-            .then((auth) => {
-                history.push('/')
-            })
-            .catch(e => alert(e.message))*/
     }
 
     return(

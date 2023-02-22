@@ -70,7 +70,6 @@ export default class ProductInfoDao {
                 }
             }
 
-            console.log(JSON.stringify(query))
         }
 
         if(sort) {
@@ -93,7 +92,6 @@ export default class ProductInfoDao {
             for(let i = 0; i < productList.length; i++) {
                 withReviews[i] = await this.appendReviewAggregate(productList[i])
             }
-            console.log(withReviews)
             return { withReviews, totalNumProducts }
         } catch (err) {
             console.error(`Unable to convert cursor to array or problem counting documents, ${err}`)
@@ -131,14 +129,6 @@ export default class ProductInfoDao {
 
     static async appendNewReview(productId, reviewTitle, reviewScore, reviewDescription, userId) {
         let updateRes
-        console.log({
-            "productId": productId,
-            "reviewTitle": reviewTitle,
-            date: Date.now(),
-            "reviewScore": reviewScore,
-            "reviewDescription": reviewDescription,
-            "userId": userId
-        })
         try {
             updateRes = await productInfo.updateOne({_id: new ObjectId(productId)},
                 {
@@ -156,7 +146,6 @@ export default class ProductInfoDao {
             console.error(e)
             return {status: 500, message: "Something went wrong submitting review: " + e}
         }
-        console.log(updateRes)
         return updateRes.modifiedCount === 1 ?  {status: 200, message: "Review successfully submitted."} :
              {status: 500, message: "Something went wrong upon submitting review."}
     }

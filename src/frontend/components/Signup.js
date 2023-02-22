@@ -2,10 +2,11 @@ import {Link, useNavigate} from "react-router-dom";
 import Logo from "../images/svg/Logo";
 import React, {useState} from "react";
 import UserService from "../utilities/UserService";
-
+import {useStateValue} from "../StateProvider"
 const Signup = () => {
     const [errorMessage, setError] = useState(null)
     const navigate = useNavigate();
+    const [{loggedin}, dispatch] = useStateValue()
     const signUpUser = (e) => {
         const user = e.target[0].value
         const email = e.target[1].value
@@ -15,8 +16,27 @@ const Signup = () => {
         if(!email || !newPassword || !reEnterPassword) return setError("Please fill out all fields.")
         if(newPassword !== reEnterPassword) return setError("Passwords do not match.")
         UserService.signupUser(email, newPassword, user).then(res => {
-            setError(null)
-            navigate("/")
+            console.log(res)
+            if(res.status === 201) {
+                const userData = {
+                    "userInfo" : {
+                        _id: res.data.userId,
+                        "name": user,
+                        "email": email
+                    }
+                }
+                dispatch({
+                    type: 'SET_LOGIN',
+                    user: userData
+                })
+                UserService.setCookie(userData).then(() => {
+                    setError(null)
+                    navigate("/")
+                }).catch(e => {
+                    setError(e)
+                    console.error(e)
+                })
+            }
         }).catch(err => {
             setError(err.response.data.message)
         })
