@@ -18,10 +18,9 @@ import UserService from "./utilities/UserService";
 function App() {
   const [{loggedinuser}, dispatch] = useStateValue()
   useEffect( () => {
+      //On startup, check if a cookie exists and initiate the login based on the cookie
       const getCookie = async () => {
-          const cookieInfo = await UserService.getCookie()
-          return cookieInfo
-
+          return await UserService.getCookie()
       }
       getCookie().then(res => {
           if(res.data.login){
@@ -39,8 +38,6 @@ function App() {
           console.error(err)
       })
   }, [])
-
-
 
   return (
       <Router>

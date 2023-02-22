@@ -5,6 +5,7 @@ import "../css/ProductPage.css"
 import { useStateValue } from '../StateProvider.js'
 import Alert, {setAlert} from "./Alert.js"
 import { useParams } from "react-router-dom"
+import renderRating from "../utilities/RenderRating"
 import StarIcon from '@mui/icons-material/Star';
 import StarHalfIcon from '@mui/icons-material/StarHalf';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
@@ -29,24 +30,7 @@ const ProductPage = () => {
     ]
 
     useEffect(() => {
-        let reviewStars = []
-        if(product.reviewCount > 0) {
-            const initialStars = Math.floor(product.reviewScore)
-            const partialStar = product.reviewScore % initialStars > 0.4
-            for(let i = 0; i < initialStars; i++) {
-                reviewStars[i] = <StarIcon />
-            }
-            if(product.reviewScore != 5) {
-                reviewStars[initialStars] = partialStar ? <StarHalfIcon /> : <StarOutlineIcon />
-                if(initialStars < 4) {
-                    for(let i = initialStars + 1; i <= 4; i++) {
-                        reviewStars[i] = <StarOutlineIcon />
-                    }
-                }
-            }
-            console.log(reviewStars)
-            setReviewScore(reviewStars)
-        }
+        setReviewScore(renderRating(product?.reviewCount, product?.reviewScore))
     }, [product])
 
     useEffect(() => {

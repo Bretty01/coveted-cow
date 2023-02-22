@@ -3,12 +3,24 @@ import '../css/Product.css'
 import { useStateValue } from '../StateProvider.js'
 import ProductService from '../utilities/product-service.js'
 import { Link } from 'react-router-dom'
+import StarIcon from '@mui/icons-material/Star';
+import StarHalfIcon from '@mui/icons-material/StarHalf';
+import StarOutlineIcon from '@mui/icons-material/StarOutline';
+import renderRating from '../utilities/RenderRating'
 
 function ProductCard(props){
     const[products, setProducts] = useState([])
+    const [reviewScore, setReviewScore] = useState([<StarOutlineIcon />, <StarOutlineIcon />, <StarOutlineIcon />,
+        <StarOutlineIcon />, <StarOutlineIcon />, ])
     useEffect(() => {
         retrieveProducts()
     }, [])
+
+    useEffect(() => {
+        if(products[0]?.reviews) {
+            setReviewScore(renderRating(products[0].reviewCount, products[0].reviewScore))
+        }
+    }, [products])
 
     const retrieveProducts = () => {
         if(props.sku !== undefined) {
@@ -37,6 +49,9 @@ function ProductCard(props){
                  alt="Product Image" />
             <div className="product_info">
                 <span>{products[0]?.name || ""}</span>
+                <div className="star-rating">{reviewScore.map(star => {
+                    return star
+                })}({products[0]?.reviewCount})</div>
                 <span className="product-price"><strong>${products[0]?.price || "0"}</strong></span>
             </div>
         </Link>

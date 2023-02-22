@@ -6,15 +6,25 @@ import "../css/Account.css"
 const Account = () => {
     const navigate = useNavigate()
     const [{loggedinuser}, dispatch] = useStateValue()
+    //Used to popup the modal to confirm account deletion
     const [modal, setModal] = useState(false)
     const [errorMessage, setError] = useState(null)
+
+    /**
+     * Function: handlePasswordChange
+     * Purpose: Submits the form that is used to change the password. Also compares passwords to see if they are
+     * correct.
+     * @param e Form event handler.
+     */
     const handlePasswordChange = async (e) => {
         e.preventDefault()
         const id = loggedinuser._id
         const oldPassword = e.target[0].value
         const newPassword = e.target[1].value
         const reenterPassword = e.target[2].value
+        //Compare new password and re-entered passwords to see if they match.
         if(newPassword !== reenterPassword) return setError("Passwords do not match.")
+        //Submit passwords to backend and await response.
         UserService.updatePassword(id, oldPassword, newPassword).then(() => {
             navigate("/")
         }).catch(err => {
@@ -22,9 +32,24 @@ const Account = () => {
         })
     }
 
+    /**
+     * Function: deleteAccount
+     * Purpose: Deletes the account given after confirmation
+     * @returns {Promise<void>}
+     */
     const deleteAccount = async () => {
-        const res = await UserService.deleteUser(loggedinuser._id)
-        console.log(res)
+        try {
+            //Attempt to delete the user and then reset the user login and delete the existing cookie.
+            await UserService.deleteUser(loggedinuser._id)
+            await UserService.deleteCookie()
+            dispatch({
+                type: 'SET_LOGIN',
+                user: null
+            })
+            navigate("/")
+        } catch (e) {
+            setError("Unable to delete account: " + e)
+        }
     }
 
     return (
@@ -54,7 +79,6 @@ const Account = () => {
                 ) : (
                     <p>Please login to your account to use this page.</p>
                 )}
-
             </div>
             {modal && (
                 <div className="account-modal">

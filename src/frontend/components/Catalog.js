@@ -230,7 +230,7 @@ function Catalog() {
                     </div>
                 </div>
                 <div class="row">
-                    {productList.map(product => {
+                    {productList?.map(product => {
                         return(
                             <Product
                                 sku={product.product_description.sku}

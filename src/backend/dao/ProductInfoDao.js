@@ -89,8 +89,12 @@ export default class ProductInfoDao {
         try {
             const productList = await displayCursor.toArray()
             const totalNumProducts = await productInfo.countDocuments(query)
-
-            return { productList, totalNumProducts }
+            let withReviews = []
+            for(let i = 0; i < productList.length; i++) {
+                withReviews[i] = await this.appendReviewAggregate(productList[i])
+            }
+            console.log(withReviews)
+            return { withReviews, totalNumProducts }
         } catch (err) {
             console.error(`Unable to convert cursor to array or problem counting documents, ${err}`)
             return { productList: [], totalNumProducts: 0 }

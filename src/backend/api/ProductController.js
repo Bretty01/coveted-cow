@@ -25,7 +25,7 @@ export default class ProductController {
 
         }
 
-        const { productList, totalNumProducts } = await ProductInfoDAO.getProducts({
+        const { withReviews, totalNumProducts } = await ProductInfoDAO.getProducts({
             filters,
             sort,
             search,
@@ -34,7 +34,7 @@ export default class ProductController {
         })
 
         let response = {
-            products: productList,
+            products: withReviews,
             page: page,
             filters: filters,
             sort: sort,

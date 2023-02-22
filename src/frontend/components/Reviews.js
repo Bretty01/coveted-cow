@@ -2,6 +2,7 @@ import {useState} from "react"
 import {useStateValue} from "../StateProvider"
 import "../css/Reviews.css"
 import ProductService from "../utilities/product-service"
+import {setAlert} from "./Alert"
 const Reviews = (props) => {
     const[{loggedinuser}, dispatch] = useStateValue()
     const [ratingNumber, setRating] = useState(5)
@@ -10,7 +11,7 @@ const Reviews = (props) => {
         e.preventDefault()
         ProductService.submitReview(props.productId, e.target[0].value, parseInt(e.target[1].value), e.target[2].value,
           loggedinuser._id).then(res => {
-            console.log("Review submitted")
+            setAlert("success", "Thank you for submitting your review!")
             setDisable(true)
         }).catch(err => console.error(err))
     }
