@@ -24,7 +24,6 @@ function App() {
           return await UserService.getCookie()
       }
       getCookie().then(res => {
-          console.log(res)
           if(res.data.login){
               dispatch({
                   type: 'SET_LOGIN',

@@ -139,7 +139,7 @@ const ProductPage = () => {
                 <div id="main-content">
                     <strong>{product.name}</strong>
                     <div className="product-page-upper">
-                        <img className="product-image" src={product.image ||
+                        <img className="product-image" src={"/images" + product.image ||
                         "https://c.tenor.com/I6kN-6X7nhAAAAAi/loading-buffering.gif"} alt={product.name}/>
                         <div className="product-page-sales">
                             <div className="sales-upper">

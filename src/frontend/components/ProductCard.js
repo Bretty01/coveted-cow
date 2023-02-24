@@ -51,7 +51,7 @@ function ProductCard(props){
     return (
         <Link to={"/product/" + products[0]?._id}
               className="product col-12 col-md-4 col-lg-3">
-            <img src={products[0]?.image || "https://c.tenor.com/I6kN-6X7nhAAAAAi/loading-buffering.gif"}
+            <img src={"/images" + products[0]?.image || "https://c.tenor.com/I6kN-6X7nhAAAAAi/loading-buffering.gif"}
                  alt="Product Image" />
             <div className="product_info">
                 <span>{products[0]?.name || ""}</span>
