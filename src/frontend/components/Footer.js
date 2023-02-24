@@ -30,6 +30,12 @@ function Footer(){
                     </div>
                 </div>
             </div>
+            <div className="footer-disclaimer">
+                <p>Disclaimer: This website is merely for demonstration purposes only and sadly, you can not actually
+                    purchase a fluffy stuffed cow. All passwords, however, are securely encrypted. Take precautions anyways
+                    and do not submit information that is private to you. Any questions or concerns, please contact
+                    me <a href="mailto:b3orban@gmail.com">here</a>.</p>
+            </div>
         </div>
     )
 }

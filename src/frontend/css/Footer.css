@@ -42,6 +42,12 @@
     padding: 3%;
 }
 
+.footer-disclaimer {
+    font-size: 10px;
+    width: 80%;
+    margin: 1em auto 0;
+}
+
 .footer-socials svg {
     height: 24px;
     width: 24px;

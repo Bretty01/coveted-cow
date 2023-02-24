@@ -142,7 +142,7 @@ function Header() {
                         <div id="header-right">
                             <div className="header-login">
                                 <div onClick={logoutUser} className="header_option">
-                                    <span>Hello, {loggedinuser?.name}</span>
+                                    <span>{loggedinuser?.name}</span>
                                     <span>{loggedinuser ? 'Sign Out' : 'Sign In'}</span>
                                 </div>
                             </div>
@@ -161,7 +161,10 @@ function Header() {
             <div id="mobile-searchbar">
                 <form onSubmit={handleInput}>
                     <input type="text" className="header-searchInput" />
-                    <input type="submit"/>
+                    <label>
+                        <input type="submit" style={{"display": "none"}}/>
+                        <Search className="header-searchIcon"/>
+                    </label>
                 </form>
             </div>
             {
@@ -177,10 +180,13 @@ function Header() {
                 <Link to="/checkout">
                     <h1 onClick={() => changeMenuState()}>Checkout</h1>
                 </Link>
+                <Link to="/about">
+                    <h1 onClick={() => changeMenuState()}>About</h1>
+                </Link>
                 <div id="mobile-menu-user">
                     <Link to={!loggedinuser && "/login"} className="header_link">
                         <div onClick={logoutUser} className="header_option">
-                            <span className="header_optionOne">Hello, {loggedinuser?.email}</span>
+                            <span className="header_optionOne">{loggedinuser?.name}</span>
                             <span className="header_optionTwo">{loggedinuser ? 'Sign Out' : 'Sign In'}</span>
                         </div>
                     </Link>

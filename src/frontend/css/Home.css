@@ -5,6 +5,14 @@
     margin-right: auto;
 }
 
+.home > div {
+    padding: 2rem 0;
+}
+
+.home strong {
+    font-size: 2em;
+}
+
 #home-carousel{
     height: 40vh;
 }
@@ -18,6 +26,14 @@
 .carousel-item > img{
     max-height: 30vh;
     width: 100%;
+}
+
+.carousel-item-start > img {
+    object-fit: contain;
+}
+
+#home-carousel .carousel-indicators {
+    display: none;
 }
 
 .active > img{

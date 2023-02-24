@@ -1,5 +1,6 @@
 #account {
     margin: calc(var(--header-height) + 1rem) 10% 1rem;
+    min-height: 60vh;
 }
 #account form {
     width: 50%;

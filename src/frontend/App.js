@@ -9,6 +9,7 @@ import Footer from './components/Footer.js'
 import Signup from './components/Signup'
 import Catalog from './components/Catalog.js'
 import Account from './components/Account.js'
+import About from "./components/About"
 import {useEffect} from 'react'
 import {useStateValue} from './StateProvider.js'
 import UserService from "./utilities/UserService";
@@ -88,6 +89,13 @@ function App() {
                     <div>
                         <Header />
                         <Account />
+                        <Footer />
+                    </div>
+                } />
+                <Route path="/about" element={
+                    <div>
+                        <Header />
+                        <About />
                         <Footer />
                     </div>
                 } />

@@ -2,12 +2,11 @@ import React from 'react'
 import Carousel from 'react-bootstrap/Carousel'
 import '../css/Home.css'
 import Product from './ProductCard.js'
-import ProductService from "../utilities/product-service.js"
 
 function Home(){
     return(
         <div className="home main">
-            <Carousel fade controls={false} id="home-carousel" className="d-block m-3">
+            <Carousel controls={false} id="home-carousel" className="d-block m-3">
                 <Carousel.Item>
                     <img
                         className="rounded d-block"
