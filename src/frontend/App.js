@@ -51,7 +51,7 @@ function App() {
                         <Footer/>
                     </div>
                 } />
-                <Route path="/catalog" element={
+                <Route path="/catalog/:search?" element={
                     <div>
                         <Header/>
                         <Catalog/>

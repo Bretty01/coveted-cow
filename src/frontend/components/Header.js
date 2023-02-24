@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {Search, ShoppingBasket, Menu} from "@mui/icons-material"
-import { Link , useNavigate} from 'react-router-dom'
+import { Link , useNavigate, useLocation} from 'react-router-dom'
 import { useStateValue } from '../StateProvider.js'
 import Navlinks from './Navlinks.js'
 import '../css/Header.css'
@@ -9,10 +9,22 @@ import Alert from './Alert.js'
 import UserService from "../utilities/UserService"
 function Header() {
     let navigate = useNavigate()
-    const [inputText, setInputText] = useState("")
+    const { pathname } = useLocation();
+    //useState variables
     const [menuSwitch, setMenuSwitch] = useState(-1)
     const [searchSwitch, setSearchSwitch] = useState(true)
     const [{basket, loggedinuser}, dispatch] = useStateValue();
+
+    //useEffect variables
+
+    //Any time a new page is navigated to, scroll to the top of the page.
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
+    useEffect(() => {
+        menuAnimation()
+    }, [menuSwitch])
+
     const logoutUser = async () => {
         if(loggedinuser){
             dispatch({
@@ -26,23 +38,31 @@ function Header() {
         }
     }
 
-    useEffect(() => {
-        menuAnimation()
-    }, [menuSwitch])
-
+    /**
+     * Function: handleInput
+     * Purpose: Handles the search bar input to create a search query for the catalog
+     * @param event Search bar form event handler
+     */
     const handleInput = (event) => {
-        if(window.screen.width >= 768) {
-            setInputText(document.getElementsByClassName("header-searchInput")[0].value)
-        }
-        else {
-            setInputText(document.getElementsByClassName("header-searchInput")[1].value)
-        }
+        event.preventDefault()
+        navigate("/catalog/" + event.target[0].value, {
+            state: event.target[0].value,
+            replace: true
+        })
     }
 
+    /**
+     * Function: changeMenuState
+     * Purpose: Switches the mobile menu on and off.
+     */
     const changeMenuState = () => {
         setMenuSwitch((menuSwitch === 0) ? 1 : 0)
     }
 
+    /**
+     * Function: menuAnimation
+     * Purpose: Depending on the state of the mobile menu popup, scroll in/scroll out the menu page.
+     */
     const menuAnimation = () => {
         const menuIcon = document.getElementById("header-menu-icon")
         const menuBox = document.getElementById("mobile-menu")
@@ -59,6 +79,10 @@ function Header() {
 
     }
 
+    /**
+     * Function: toggleSearchBar
+     * Purpose: On click of the search icon on mobile. Pop up the search bar or hide the search bar.
+     */
     const toggleSearchBar = () => {
         const search = document.getElementById("mobile-searchbar")
         setSearchSwitch(!searchSwitch)
@@ -69,6 +93,9 @@ function Header() {
     return(
         <div>
             <div>
+                {
+                    //Mobile Header
+                }
                 <div className="header header-mobile">
                     <div id="header-left">
                         <input type="checkbox" id="header-menu" onClick={() => changeMenuState()}/>
@@ -91,22 +118,26 @@ function Header() {
                             <span className="header-productCount">{basket?.length}</span>
                         </Link>
                     </div>
-
                 </div>
+                {
+                    //Desktop header
+                }
                 <div className="header-desktop-block">
                     <div className="header header-desktop">
                         <Link to="/" id="header-left" >
                             <Logo />
-                            <img src="https://fontmeme.com/permalink/220219/4690785ad27bbbaacf4dcf2e65c29223.png" />
+                            <img alt="Coveted Cow"
+                                 src="https://fontmeme.com/permalink/220219/4690785ad27bbbaacf4dcf2e65c29223.png" />
                         </Link>
                         <div id="header-middle">
-                            <input type="text" className="header-searchInput" onChange={handleInput}/>
-                            <Link to={{
-                                pathname: "/catalog",
-                                state:{search: inputText}
-                            }}>
-                                <Search className="header-searchIcon"/>
-                            </Link>
+                            <form onSubmit={handleInput}>
+                                <input type="text" className="header-searchInput" />
+                                <label>
+                                    <input type="submit" style={{"display": "none"}}/>
+                                    <Search className="header-searchIcon"/>
+                                </label>
+
+                            </form>
                         </div>
                         <div id="header-right">
                             <div className="header-login">
@@ -124,15 +155,18 @@ function Header() {
                     <Navlinks />
                 </div>
             </div>
+            {
+                //Mobile search pop up
+            }
             <div id="mobile-searchbar">
-                <input type="text" className="header-searchInput" onChange={handleInput}/>
-                <Link to={{
-                    pathname: "/catalog",
-                    state:{search: inputText}
-                }} onClick={toggleSearchBar}>
-                    <Search className="header-searchIcon"/>
-                </Link>
+                <form onSubmit={handleInput}>
+                    <input type="text" className="header-searchInput" />
+                    <input type="submit"/>
+                </form>
             </div>
+            {
+                //Mobile pop up menu
+            }
             <div id="mobile-menu" onfocusout={changeMenuState}>
                 <Link to="/">
                     <h1 onClick={() => changeMenuState()}>Home</h1>

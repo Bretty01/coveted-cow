@@ -5,13 +5,20 @@ import ProductService from "../utilities/product-service"
 import {setAlert} from "./Alert"
 const Reviews = (props) => {
     const[{loggedinuser}, dispatch] = useStateValue()
+    //useState variables
     const [ratingNumber, setRating] = useState(5)
     const [buttonDisabled, setDisable] = useState(false)
+    /**
+     * Function: handleReview
+     * Purpose: Takes review information and submits it to the backend.
+     * @param e Event handler for the review form.
+     */
     const handleReview = (e) => {
         e.preventDefault()
         ProductService.submitReview(props.productId, e.target[0].value, parseInt(e.target[1].value), e.target[2].value,
           loggedinuser._id).then(res => {
             setAlert("success", "Thank you for submitting your review!")
+            //Disable the submit button to prevent multiple submissions.
             setDisable(true)
         }).catch(err => console.error(err))
     }

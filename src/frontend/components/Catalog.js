@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react'
-import {useLocation} from 'react-router-dom'
+import React, {useState, useEffect, useRef} from 'react'
+import {useLocation, useParams} from 'react-router-dom'
 import Product from './ProductCard.js'
 import ProductService from '../utilities/product-service.js'
 import {setAlert} from './Alert.js'
@@ -9,7 +9,8 @@ import Form from 'react-bootstrap/Form'
 
 function Catalog() {
     const location = useLocation()
-    const search = location.state ? location.state.search : ""
+    const {search} = useParams()
+    //useState variables
     const[productList, setProductList] = useState([])
     const[data, setData] = useState([])
     const[lastPage, setLastPage] = useState(1)
@@ -17,7 +18,10 @@ function Catalog() {
     const[brandFilters, setBrandFilters] = useState([])
     const[sort, setSort] = useState("")
     const[filters, setFilters] = useState({"price" : [], "brand" : []})
-    const[isExpanded, setExpand] = useState(false);
+    const[isExpanded, setExpand] = useState(false)
+    //useRef variables
+    const topRef = useRef(null)
+    //useEffect callbacks
     useEffect(() => {
         getBrandList()
     }, [])
@@ -29,8 +33,12 @@ function Catalog() {
     }, [lastPage])
     useEffect(() => {
         createQuery()
-    }, [sort, currentPage])
+    }, [sort, currentPage, search])
 
+    /**
+     * Function: getBrandList
+     * Purpose: Get every unique brand and sets them as a filter.
+     */
     const getBrandList = () => {
         ProductService.getBrandList()
             .then(res => {
@@ -54,6 +62,13 @@ function Catalog() {
         )
     }
 
+    /**
+     * Function: disablePageButtons
+     * Purpose: Determines which if either of the "Previous" and "Next" buttons are disabled or not.
+     * If on last page -> Next button is disabled
+     * If on first page -> Previous button is disabled
+     * If there is only 1 page -> Both buttons are disabled
+     */
     const disablePageButtons = () => {
         currentPage === 0 ? (document.getElementById("prevButton").style.visibility="hidden") :
             (document.getElementById("prevButton").style.visibility="visible")
@@ -61,9 +76,15 @@ function Catalog() {
             (document.getElementById("nextButton").style.visibility="visible")
     }
 
+    /**
+     * Function: createQuery
+     * Purpose: Parses together a query that can be passed into the backend by a GET http request.
+     */
     const createQuery = () => {
         let queryString = `?page=${currentPage}`
-        if(search !== "" && search !== null) {
+        //search is obtained by the URL
+        // ex: "/catalog/cow" the search term would be "cow"
+        if(search && search !== "") {
             queryString += `&search=${search}`
         }
         if(sort) {
@@ -72,14 +93,21 @@ function Catalog() {
         if(Object.keys(filters.price).length > 0 || Object.keys(filters.brand).length > 0) {
             queryString += `&filters=${JSON.stringify(filters)}`
         }
-        console.log(queryString)
-
         getQuery(queryString)
     }
 
+    /**
+     * Function: getQuery
+     * Purpose: Passes the built query into the api and sets the results.
+     * @param queryString The finished query string to be sent out.
+     */
     const getQuery = (queryString) => {
+        //Future Brett should check if Past Brett did the right thing here. Present Brett doesnt think it does anything
+        // setting the state right here.
         setProductList([])
         setData([])
+
+        //Pass the query string into the API and set the data.
         ProductService.getQuery(queryString)
             .then(res => {
                 setProductList(res.data.products)
@@ -87,7 +115,15 @@ function Catalog() {
             })
     }
 
+    /**
+     * Function: applySort
+     * Purpose: Takes the passed in sort values, and updates the state so it's the new sort value. The new sort value
+     * will then be taken to create a new query.
+     * @param type The type of sort (sort by alphabet, sort by price, etc.)
+     * @param order The order in which the sort is applied (1 = ascending, -1 = descending)
+     */
     const applySort = (type, order) => {
+        //Reset the page to page 1
         setCurrentPage(0)
         setSort(`${type},${order}`)
     }
@@ -126,27 +162,41 @@ function Catalog() {
         createQuery()
     }
 
+    /**
+     * Function: setBrandFilter
+     * Purpose: Takes the brand based on the button clicked, and adds it to the filter. Removes the brand from the
+     * filter if the button is no longer active.
+     * @param event Event handler for the button pressed.
+     */
     const setBrandFilter = (event) => {
         const brand = event.target.value
         let index = -1
         let currentFilter = filters
+        //Enable the button and pass the brand to the filter.
         if(event.target.classList[2] === "off") {
             event.target.className = "button-brand button-secondary on"
             currentFilter["brand"].push(brand)
-        } else {
+        }
+        //Disable the button and remove the brand from the filter.
+        else {
             event.target.className = "button-brand button-secondary off"
             index = currentFilter["brand"].indexOf(brand)
             if(index !== -1) {
                 currentFilter["brand"].splice(index, 1)
             }
         }
+        //Update the filters, reset the page number and set the updated product query.
         setFilters(currentFilter)
         setCurrentPage(0)
         createQuery()
     }
 
+    /**
+     * Function: mobileFilterExpand
+     * Purpose: Extends or retracts the window for the filter section on mobile devices.
+     */
     const mobileFilterExpand = () => {
-        var filter = document.getElementById("filter-block")
+        let filter = document.getElementById("filter-block")
         if(isExpanded) {
             filter.className = "";
             setExpand(false);
@@ -159,6 +209,9 @@ function Catalog() {
 
     return (
         <div className="main">
+            {
+                //Mobile sorts and filters dropdown at top of page.
+            }
             <div className="mobile-sortFilter">
                 <div id="sortFilter-buttons">
                     <button type="button" className="button-secondary" id="button-filter"
@@ -166,10 +219,10 @@ function Catalog() {
                     <div className="dropdown-sort">
                         <button className="button-secondary">Sort By...</button>
                         <div className="sort-content">
-                            <a onClick={() => applySort("name", 1)}>A-Z</a>
-                            <a onClick={() => applySort("name", -1)}>Z-A</a>
-                            <a onClick={() => applySort("price", 1)}>Price: Low to High</a>
-                            <a onClick={() => applySort("price", -1)}>Price: High to Low</a>
+                            <button onClick={() => applySort("name", 1)}>A-Z</button>
+                            <button onClick={() => applySort("name", -1)}>Z-A</button>
+                            <button onClick={() => applySort("price", 1)}>Price: Low to High</button>
+                            <button onClick={() => applySort("price", -1)}>Price: High to Low</button>
                         </div>
                     </div>
                 </div>
@@ -195,15 +248,21 @@ function Catalog() {
                     </div>
                 </div>
             </div>
-            <div className="catalog-content">
+            {
+                //Main product catalog section
+            }
+            <div className="catalog-content"  ref={topRef}>
+                {
+                    //Side fixed bar containing the sorts and filters for desktop
+                }
                 <div className="sidebar">
                     <div className="dropdown-sort">
                         <button className="button-secondary">Sort By...</button>
                         <div className="sort-content">
-                            <a onClick={() => applySort("name", 1)}>A-Z</a>
-                            <a onClick={() => applySort("name", -1)}>Z-A</a>
-                            <a onClick={() => applySort("price", 1)}>Price: Low to High</a>
-                            <a onClick={() => applySort("price", -1)}>Price: High to Low</a>
+                            <button onClick={() => applySort("name", 1)}>A-Z</button>
+                            <button onClick={() => applySort("name", -1)}>Z-A</button>
+                            <button onClick={() => applySort("price", 1)}>Price: Low to High</button>
+                            <button onClick={() => applySort("price", -1)}>Price: High to Low</button>
                         </div>
                     </div>
                     <div className="filter-price">
@@ -235,14 +294,16 @@ function Catalog() {
                         )
                     })}
                     <div className="page-buttons">
-                        <button type="button" id="prevButton" className="button-generic" href=".main"
+                        <button type="button" id="prevButton" className="button-generic"
                                 onClick={() => {
+                                    topRef.current.scrollIntoView()
                                     setCurrentPage(page => page - 1)
                                 }}>Previous
                         </button>
                         <p>Page {data.page + 1} of {lastPage}</p>
-                        <button type="button" id="nextButton" className="button-generic" href=".main"
+                        <button type="button" id="nextButton" className="button-generic"
                                 onClick={() => {
+                                    topRef.current.scrollIntoView()
                                     setCurrentPage(page => page + 1)
                                 }}>Next
                         </button>

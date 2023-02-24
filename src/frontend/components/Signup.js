@@ -4,17 +4,27 @@ import React, {useState} from "react";
 import UserService from "../utilities/UserService";
 import {useStateValue} from "../StateProvider"
 const Signup = () => {
-    const [errorMessage, setError] = useState(null)
     const navigate = useNavigate();
     const [{loggedin}, dispatch] = useStateValue()
+    //useState variables
+    const [errorMessage, setError] = useState(null)
+
+    /**
+     * Function: signUpUser
+     * Purpose: Checks the user credentials to see if they are valid, then submits them to the backend.
+     * @param e Event handler for the signup form.
+     */
     const signUpUser = (e) => {
         const user = e.target[0].value
         const email = e.target[1].value
         const newPassword = e.target[2].value
         const reEnterPassword = e.target[3].value
         e.preventDefault()
+        //If certain form elements are not filled out, or the passwords do not match each other, throw an error to
+        //  the user.
         if(!email || !newPassword || !reEnterPassword) return setError("Please fill out all fields.")
         if(newPassword !== reEnterPassword) return setError("Passwords do not match.")
+        //Submit user information. If successful, set the user login and set a cookie.
         UserService.signupUser(email, newPassword, user).then(res => {
             console.log(res)
             if(res.status === 201) {

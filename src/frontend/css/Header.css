@@ -35,7 +35,18 @@
 /* Middle Header */
 #header-middle{
     width: 40%;
+}
+#header-middle form {
     display: flex;
+    flex-direction: row;
+}
+#header-middle form input {
+    height: 100%;
+}
+#header-middle svg {
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
 }
 
 /* Right Side Header */
@@ -150,7 +161,7 @@
         align-items: center;
     }
 
-    #mobile-menu{
+    #mobile-menu, #mobile-searchbar{
         display: none;
     }
 }
@@ -171,7 +182,10 @@
     }
 
     .header-mobile svg, .header-mobile label{
-        color: var(--primary-colour);
+        fill: var(--primary-colour);
+        display: flex;
+        align-items: center;
+        padding: 0;
     }
 
     .header-mobile{
@@ -194,7 +208,15 @@
 
     /* Middle Header */
     .header-home{
+        display: block;
         margin: auto;
+        height: 100%;
+        width: 70px;
+    }
+
+    #header-middle svg {
+        height: 100%;
+        width: 100%;
     }
 
     /* Right Side Header */

@@ -1,23 +1,30 @@
 import React from 'react'
+import {useNavigate} from 'react-router-dom'
 import CurrencyFormat from 'react-currency-format'
 import {useStateValue} from '../StateProvider.js'
-import {setAlert} from './Alert.js'
 import '../css/Subtotal.css'
 
 function Subtotal(){
+    const [{basket}, dispatch] = useStateValue();
+    const navigate = useNavigate()
 
     const getCartTotal = (basket) => {
         //Needed to grab just the cost, but the whole object was being added to the basket.
         //  The check is to make sure the price number is grabbed.
-        var total = basket?.reduce((amount, item) => (amount.total || amount) + item.total)
+        let total = basket?.reduce((amount, item) => (amount.total || amount) + item.total)
         return total.total || total
     }
-    const [{basket}, dispatch] = useStateValue();
 
+    /**
+     * Function: processTransaction
+     * Purpose: In an ideal world, the payment processing would go here. But since this is not a real e-commerce
+     * website, we just remove the shopping cart information and redirect the user.
+     */
     const processTransaction = () => {
         dispatch({
             type: 'REMOVE_ALL'
         })
+        navigate("/")
     }
 
     return(

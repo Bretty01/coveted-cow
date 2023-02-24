@@ -7,6 +7,7 @@ export default class ProductController {
         let filters = null
         let sort = null
         let search = null
+        //Determine what to query based on the passed in parameters
         if(req.query.filters) {
             filters = JSON.parse(req.query.filters)
         } else if (req.query.sku) {
@@ -22,9 +23,9 @@ export default class ProductController {
                 type:split[0],
                 order:split[1]
             }
-
         }
 
+        //Pass all the parsed parameters into the DAO to retrieve a list of products
         const { withReviews, totalNumProducts } = await ProductInfoDAO.getProducts({
             filters,
             sort,
@@ -33,6 +34,7 @@ export default class ProductController {
             productsPerPage
         })
 
+        //Take the response and return it in json format
         let response = {
             products: withReviews,
             page: page,
@@ -44,7 +46,9 @@ export default class ProductController {
         res.json(response)
     }
 
+
     static async getProductById(req, res, next) {
+        //Attempt to retrieve a product based on a specific product id and return it back to the user.
         try {
             let id = req.params.id || {}
             let product  = await ProductInfoDAO.getProductByID(id)
@@ -60,6 +64,7 @@ export default class ProductController {
     }
 
     static async getUniqueBrands(req, res, next) {
+        //Get every distinct brand and return it back as an array
         try {
             let product  = await ProductInfoDAO.getUniqueBrands()
             if(!product) {
@@ -74,8 +79,10 @@ export default class ProductController {
     }
 
     static async submitReview(req, res) {
+        //If certain information was not filled out, return a 400 code error
         if(!req.body.reviewTitle || !req.body.reviewScore || !req.body.reviewDescription)
             return res.status(400).json({message: "Please enter all required information."})
+        //Attempt to submit review if all information is present.
         const {status, message} = await ProductInfoDAO.appendNewReview(req.body.productId, req.body.reviewTitle,
             req.body.reviewScore, req.body.reviewDescription, req.body.userId)
         res.status(status).json({"message": message})

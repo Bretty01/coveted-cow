@@ -9,19 +9,25 @@ import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import renderRating from '../utilities/RenderRating'
 
 function ProductCard(props){
+    //useState variables
     const[products, setProducts] = useState([])
     const [reviewScore, setReviewScore] = useState([<StarOutlineIcon />, <StarOutlineIcon />, <StarOutlineIcon />,
         <StarOutlineIcon />, <StarOutlineIcon />, ])
+    //useEffect callbacks
     useEffect(() => {
         retrieveProducts()
     }, [])
-
     useEffect(() => {
         if(products[0]?.reviews) {
             setReviewScore(renderRating(products[0].reviewCount, products[0].reviewScore))
         }
     }, [products])
 
+    /**
+     * Function: retrieveProducts
+     * Purpose: Gets the product information based on the sku provided and sets the product card based on the returned
+     *  information.
+     */
     const retrieveProducts = () => {
         if(props.sku !== undefined) {
             ProductService.find(parseInt(props.sku), "sku")

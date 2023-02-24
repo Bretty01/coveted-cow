@@ -6,6 +6,11 @@ import CurrencyFormat from 'react-currency-format'
 function ProductCart({id, name, image, price, quantity, total}){
     const [{basket}, dispatch] = useStateValue();
 
+    /**
+     * Function: removeItem
+     * Purpose: on clicking the "Remove" button, pass in the "REMOVE_FROM_CART" function to remove the item from the
+     *  shopping cart.
+     */
     const removeItem = () => {
         dispatch({
             type: 'REMOVE_FROM_CART',
@@ -16,7 +21,7 @@ function ProductCart({id, name, image, price, quantity, total}){
     return(
         <div className="productCart">
             <div className="productCart-upper">
-                <img className="productCart-image" src={image} alt="" />
+                <img className="productCart-image" src={image} alt={name} />
             </div>
             <div className="productCart-info">
                 <div className="productCart-title">
@@ -43,12 +48,7 @@ function ProductCart({id, name, image, price, quantity, total}){
                         prefix={"$"}
                     />
                 </div>
-
-                {
-                    //TODO: Add rating system.
-                }
-
-                <button class="button-generic" onClick={removeItem}>Remove</button>
+                <button className="button-generic" onClick={removeItem}>Remove</button>
             </div>
         </div>
     )
