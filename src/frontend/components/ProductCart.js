@@ -21,7 +21,7 @@ function ProductCart({id, name, image, price, quantity, total}){
     return(
         <div className="productCart">
             <div className="productCart-upper">
-                <img className="productCart-image" src={image} alt={name} />
+                <img className="productCart-image" src={"/images" + image} alt={name} />
             </div>
             <div className="productCart-info">
                 <div className="productCart-title">

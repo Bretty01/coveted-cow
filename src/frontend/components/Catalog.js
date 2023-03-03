@@ -290,6 +290,7 @@ function Catalog() {
                         return(
                             <Product
                                 sku={product.product_description.sku}
+                                key={product.product_description.sku}
                             />
                         )
                     })}
