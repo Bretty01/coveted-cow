@@ -41,7 +41,7 @@ function Login(){
         })
             .catch(err => {
                 console.error(err)
-                setError("Unable to login: " + err.response.data.message)
+                setError("Unable to login: " + (err.response?.data?.message || err.message))
             })
     }
 

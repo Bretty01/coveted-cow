@@ -1,70 +1,132 @@
-# Getting Started with Create React App
+# Coveted Cow
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to the Coveted Cow README. This project is a full stack website 
+based on the MERN (MongoDB, ExpressJS, React, NodeJS) stack that 
+is used to create an eCommerce website that supplies cute, stuffed 
+cows. You can access the website [here](https://coveted-cow.onrender.com/).
 
-## Available Scripts
+## Table of Contents
+* Diagrams
+* Backend
+* Page Overview
+  * Header/Navigation
+  * Home
+  * About
+  * Catalog
+  * Product Information
+  * Login/Signup/Account
+* Closure
 
-In the project directory, you can run:
+## Diagrams
+### Entity Relationship Diagram
+<img src="./readmeImages/ERD.jpg" alt="ERD" height="300" />
 
-### `npm start`
+### Activity Diagrams
+#### Review Submission
+<img src="readmeImages/Activity-Diagram-Review.jpg" alt="ADReview" height="300" />
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### User Signup
+<img src="readmeImages/Activity-Diagram-Signup.jpg" alt="ADSignup" height="300" />
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Backend
 
-### `npm test`
+The backend for this project is in a separate repository located
+[here](https://www.google.ca). The backend uses ExpressJS, MongoDB,
+ and NodeJS to create a REST API to communicate information 
+with the frontend. The backend does the following utilities:
+* Products
+  * Retrieves all products
+  * Retrieves specific products based on sorts, filters and search terms
+  * Gets all unique brand names for filter purposes.
+  * Submits reviews that users create
+* Users
+  * Creates or deletes a user
+  * Verifies credentials to login a user
+  * Sets a cookie that can keep a user logged in
+  * Deletes the cookie when the user logs out.
+  * Hashes and salts a password when the user creates an account or updates their password.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Page Overview
+### Header/Navigation
+The header and navigation serve the same purpose on both desktop 
+and mobile. They can do the following:
+* Have navigation links to get to the catalog, about page, and account page.
+* Have a link to login and logout of your account.
+* Have access to the shopping cart in which you can manage the items in your shopping cart and checkout.
+* Access a search bar that you can use to search for specific product.
+* Click the site logo to go back to the home page.
 
-### `npm run build`
+<img src="./readmeImages/CC-nav-d.jpg" alt="CCNavD" height="200" />
+<img src="./readmeImages/CC-nav-m.jpg" alt="CCNavM" height="300" />
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Home
+The home page contains a carousel and featured products and other information 
+about the website. The home page is a page to welcome the user to the website 
+and catch their attention.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<img src="./readmeImages/CC-home-d.jpg" alt="CCHomeD" height="300" />
+<img src="./readmeImages/CC-home-m.jpg" alt="CCHomeM" height="300" />
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### About
 
-### `npm run eject`
+<img src="./readmeImages/CC-about-d.jpg" alt="CCAboutD" height="300" />
+<img src="./readmeImages/CC-about-m.jpg" alt="CCAboutM" height="300" />
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Catalog
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The catalog lists the products on sale. You can filter and sort 
+the products by using the buttons on the sections containing 
+the filters and sorts (side on desktop, top on mobile). Each 
+product contains their name, price, review score, and an image 
+of the product.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#### Default
+<img src="./readmeImages/CC-catalog-d-01.jpg" alt="CCCatalogD" height="300" />
+<img src="./readmeImages/CC-catalog-m-01.jpg" alt="CCCatalogM" height="300" />
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+#### w/ Brand & $50-$100 Price Filters and Sort Low to High Price
+<img src="./readmeImages/CC-catalog-d-02.jpg" alt="CCCatalogDSortFilter" height="300" />
+<img src="./readmeImages/CC-catalog-m-02.jpg" alt="CCCatalogMSortFilter" height="300" />
 
-## Learn More
+### Product Information
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Upon clicking on a product, you will be taken to its respective page. 
+On this page you will see further information about the product 
+including the price, size of the product, reviews, and the ability 
+to add a product to the shopping cart
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Users can interact with this page by adding the quantity of the product 
+and submitting it to the shopping cart. If the user is logged 
+in, they also have the option to submit a review for a product.
 
-### Code Splitting
+<img src="./readmeImages/CC-product-d-01.jpg" alt="CCProductD" height="300" />
+<img src="./readmeImages/CC-product-m-01.jpg" alt="CCProductM" height="300" />
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+#### Reviews Section
 
-### Analyzing the Bundle Size
+<img src="./readmeImages/CC-product-d-02.jpg" alt="CCProductReviewD" height="300" />
+<img src="./readmeImages/CC-product-m-02.jpg" alt="CCProductReviewM" height="300" />
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Login/Signup/Account 
+The main purpose of an account as it currently is, is to submit a review. 
+The login, signup, and account pages are means of interacting 
+with your account. The Login page logs you in to your account. 
+The Signup page create a new account, and the Account page is 
+a means of changing your password and deleting your account.
 
-### Making a Progressive Web App
+#### Login
+<img src="./readmeImages/CC-login.jpg" alt="CCLogin" height="300" />
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+#### Signup
+<img src="./readmeImages/CC-signup.jpg" alt="CCSignup" height="300" />
 
-### Advanced Configuration
+#### Account
+<img src="./readmeImages/CC-account.jpg" alt="CCAccount" height="300" />
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Closure
+Thanks for browsing this document. If you want to reach out to me,
+please refer to my contact information and socials below.
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Brett Orban | [Linkedin](https://www.linkedin.com/in/brett-orban-93994324a/) |
+[Website]() | [Github](https://github.com/Bretty01) |
+[Email](mailto:b3orban@gmail.com) |
