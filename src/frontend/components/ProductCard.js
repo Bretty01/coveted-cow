@@ -33,6 +33,7 @@ function ProductCard(props){
             ProductService.find(parseInt(props.sku), "sku")
                 .then(res => {
                     setProducts(res.data.products)
+                    console.log(res.data)
                 })
                 .catch(err => {
                     console.log(`Unable to load products, ${err}`);
@@ -42,6 +43,7 @@ function ProductCard(props){
             ProductService.getAll()
                 .then(res => {
                     setProducts(res.data.products);
+                    console.log(res.data)
                 })
                 .catch(err => {
                     console.log(`Unable to load products, ${err}`);
