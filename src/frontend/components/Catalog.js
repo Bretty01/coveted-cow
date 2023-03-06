@@ -240,7 +240,7 @@ function Catalog() {
                         <h4>Brand</h4>
                         {brandFilters.map(brand => {
                             return (
-                                <button className="button-brand button-secondary off" value={brand}
+                                <button key={brand} className="button-brand button-secondary off" value={brand}
                                         onClick={(e) => setBrandFilter(e)}>{brand}</button>
                             )
                         })}
@@ -278,7 +278,7 @@ function Catalog() {
                         <h4>Brand</h4>
                         {brandFilters.map(brand => {
                             return (
-                                <button className="button-brand button-secondary off" value={brand}
+                                <button key={brand} className="button-brand button-secondary off" value={brand}
                                         onClick={(e) => setBrandFilter(e)}>{brand}</button>
                             )
                         })}
