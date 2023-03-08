@@ -106,7 +106,6 @@ function Catalog() {
         // setting the state right here.
         setProductList([])
         setData([])
-
         //Pass the query string into the API and set the data.
         ProductService.getQuery(queryString)
             .then(res => {
@@ -297,14 +296,23 @@ function Catalog() {
                     <div className="page-buttons">
                         <button type="button" id="prevButton" className="button-generic"
                                 onClick={() => {
-                                    topRef.current.scrollIntoView()
+                                    try {
+                                        topRef.current.scrollIntoView()
+                                    } catch (e) {
+                                        console.warn("Unable to scroll: " + (e))
+                                    }
                                     setCurrentPage(page => page - 1)
                                 }}>Previous
                         </button>
                         <p>Page {data.page + 1} of {lastPage}</p>
                         <button type="button" id="nextButton" className="button-generic"
                                 onClick={() => {
-                                    topRef.current.scrollIntoView()
+                                    try {
+                                        topRef.current.scrollIntoView()
+                                    } catch (e) {
+                                        console.warn("Unable to scroll: " + (e))
+                                    }
+
                                     setCurrentPage(page => page + 1)
                                 }}>Next
                         </button>

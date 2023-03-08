@@ -15,7 +15,7 @@ const Reviews = (props) => {
      */
     const handleReview = (e) => {
         e.preventDefault()
-        ProductService.submitReview(props.productId, e.target[0].value, parseInt(e.target[1].value), e.target[2].value,
+        ProductService.submitReview(props.productId, e.target[0]?.value, parseInt(e.target[1]?.value), e.target[2]?.value,
           loggedinuser._id).then(res => {
             setAlert("success", "Thank you for submitting your review!")
             //Disable the submit button to prevent multiple submissions.
@@ -43,7 +43,7 @@ const Reviews = (props) => {
                                 <label htmlFor="review-description">Review</label>
                                 <textarea id="review-description" rows="4" />
                             </div>
-                            <input className="button-generic" type="submit" disabled={buttonDisabled}/>
+                            <input id="review-submit" className="button-generic" type="submit" disabled={buttonDisabled}/>
                         </form>
                     ) : (<span>To write a review, you will need to log in.
                         Click <a href="/login">here</a> to log in or click <a href="/signup">here</a> to signup.</span>)}

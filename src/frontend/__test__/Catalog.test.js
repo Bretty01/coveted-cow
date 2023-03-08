@@ -1,5 +1,5 @@
 import {render, screen, waitFor} from "@testing-library/react"
-import {mockBrandData} from "./mockProductData";
+import {mockBrandData, mockProductData} from "./mockProductData";
 import ProductService from "../utilities/product-service";
 import Catalog from "../components/Catalog";
 import {BrowserRouter} from "react-router-dom";
@@ -123,3 +123,60 @@ describe("Sort and filter functionality on catalog", () => {
     })
 })
 
+describe("Main catalog content functionality", () => {
+    beforeEach(() => {
+        jest.clearAllMocks()
+        ProductService.getBrandList.mockResolvedValue(mockBrandData)
+        ProductService.getQuery.mockResolvedValue(mockProductData)
+        ProductService.find.mockResolvedValue(mockProductData)
+    })
+    test("Snapshot of the catalog content", async () => {
+        const tree = render(
+            <BrowserRouter>
+                <Catalog />
+            </BrowserRouter>
+        )
+        const products = await waitFor(() => screen.getAllByTestId(/StarIcon/i))
+        expect(tree).toMatchSnapshot()
+        expect(products).toBeDefined()
+    })
+
+    test("Test page button functionality", async () => {
+        const {container} = render(
+            <BrowserRouter>
+                <Catalog />
+            </BrowserRouter>
+        )
+        const pageNumberDisplay = await waitFor(() => screen.getByText(/Page 1 of 3/i))
+        const prevButton = container.querySelector("#prevButton")
+        const nextButton = container.querySelector("#nextButton")
+
+        expect(prevButton.style.visibility).toBe("hidden")
+        expect(nextButton.style.visibility).toBe("visible")
+
+        mockProductData.data.page = 1
+        ProductService.getQuery.mockResolvedValue(mockProductData)
+        await userEvent.click(nextButton)
+
+        await waitFor(() => screen.getByText(/Page 2 of 3/i))
+        expect(prevButton.style.visibility).toBe("visible")
+        expect(nextButton.style.visibility).toBe("visible")
+
+        mockProductData.data.page = 2
+        ProductService.getQuery.mockResolvedValue(mockProductData)
+        await userEvent.click(nextButton)
+        await waitFor(() => screen.getByText(/Page 3 of 3/i))
+        expect(container).toMatchSnapshot()
+        expect(prevButton.style.visibility).toBe("visible")
+        expect(nextButton.style.visibility).toBe("hidden")
+
+        mockProductData.data.page = 1
+        ProductService.getQuery.mockResolvedValue(mockProductData)
+        await userEvent.click(prevButton)
+        await waitFor(() => screen.getByText(/Page 2 of 3/i))
+        expect(prevButton.style.visibility).toBe("visible")
+        expect(nextButton.style.visibility).toBe("visible")
+    })
+
+
+})

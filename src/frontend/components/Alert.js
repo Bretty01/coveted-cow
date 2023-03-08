@@ -22,12 +22,17 @@ function Alert() {
  * @param message The message to show to the user.
  */
 export function setAlert(status, message){
-    document.getElementById("alert-message").textContent = message
-    document.getElementById("alert-box").className = "enable"
-    document.getElementById("alert-left").className = status
-    setTimeout(()=>{
-        document.getElementById("alert-box").className =""
-    }, 5000)
+    try {
+        document.getElementById("alert-message").textContent = message
+        document.getElementById("alert-box").className = "enable"
+        document.getElementById("alert-left").className = status
+        setTimeout(()=>{
+            document.getElementById("alert-box").className =""
+        }, 5000)
+    } catch (e) {
+        console.warn("Unable to show alert: " + e)
+    }
+
 }
 
 export default Alert

@@ -170,7 +170,7 @@ function Header() {
             {
                 //Mobile pop up menu
             }
-            <div id="mobile-menu" onBlur={changeMenuState}>
+            <div id="mobile-menu">
                 <Link to="/">
                     <h1 onClick={() => changeMenuState()}>Home</h1>
                 </Link>
