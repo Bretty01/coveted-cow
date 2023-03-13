@@ -31,7 +31,7 @@ cows. You can access the website [here](https://coveted-cow.onrender.com/).
 ## Backend
 
 The backend for this project is in a separate repository located
-[here](https://www.google.ca). The backend uses ExpressJS, MongoDB,
+[here](https://github.com/Bretty01/cc-backend). The backend uses ExpressJS, MongoDB,
  and NodeJS to create a REST API to communicate information 
 with the frontend. The backend does the following utilities:
 * Products
