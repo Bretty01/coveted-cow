@@ -27,15 +27,15 @@ const Account = () => {
         //Submit passwords to backend and await response.
         UserService.updatePassword(id, oldPassword, newPassword).then(() => {
             navigate("/")
-        }).catch(err => {
-            setError("Unable to change password: " +err.response.statusText)
+        }).catch(e => {
+            console.log(e)
+            setError("Unable to change password: " + (e.response?.data?.message || e))
         })
     }
 
     /**
      * Function: deleteAccount
      * Purpose: Deletes the account given after confirmation
-     * @returns {Promise<void>}
      */
     const deleteAccount = async () => {
         try {
@@ -49,7 +49,7 @@ const Account = () => {
             navigate("/")
         } catch (e) {
             console.log(e)
-            setError("Unable to delete account: " + e)
+            setError("Unable to delete account: " + (e.response?.data?.message || e))
         }
     }
 
