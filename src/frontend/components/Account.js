@@ -50,6 +50,7 @@ const Account = () => {
         } catch (e) {
             console.log(e)
             setError("Unable to delete account: " + (e.response?.data?.message || e))
+            setModal(false)
         }
     }
 
