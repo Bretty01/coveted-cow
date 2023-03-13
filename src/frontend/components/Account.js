@@ -48,6 +48,7 @@ const Account = () => {
             })
             navigate("/")
         } catch (e) {
+            console.log(e)
             setError("Unable to delete account: " + e)
         }
     }
